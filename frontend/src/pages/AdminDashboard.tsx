@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { LogOut, RefreshCw, Filter } from 'lucide-react';
+import { LogOut, RefreshCw, Filter, Eye, X } from 'lucide-react';
 import { LOGO_BASE64 } from '../assets/LogoBase64';
 
 const AdminDashboard = () => {
@@ -11,6 +11,7 @@ const AdminDashboard = () => {
     const [analytics, setAnalytics] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('all');
+    const [selectedComplaint, setSelectedComplaint] = useState<any>(null);
 
     const token = localStorage.getItem('admin_token');
 
@@ -173,16 +174,25 @@ const AdminDashboard = () => {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <select
-                                                className="bg-white border border-slate-200 rounded px-2 py-1 text-sm outline-none focus:border-sky-500"
-                                                value={complaint.status}
-                                                onChange={(e) => updateStatus(complaint.reference_id, e.target.value)}
-                                            >
-                                                <option value="submitted">Submitted</option>
-                                                <option value="in_review">In Review</option>
-                                                <option value="resolved">Resolved</option>
-                                                <option value="rejected">Rejected</option>
-                                            </select>
+                                            <div className="flex items-center space-x-2">
+                                                <button
+                                                    onClick={() => setSelectedComplaint(complaint)}
+                                                    className="p-2 hover:bg-sky-50 rounded-lg text-sky-600 transition-colors"
+                                                    title="View Details"
+                                                >
+                                                    <Eye className="w-4 h-4" />
+                                                </button>
+                                                <select
+                                                    className="bg-white border border-slate-200 rounded px-2 py-1 text-sm outline-none focus:border-sky-500"
+                                                    value={complaint.status}
+                                                    onChange={(e) => updateStatus(complaint.reference_id, e.target.value)}
+                                                >
+                                                    <option value="submitted">Submitted</option>
+                                                    <option value="in_review">In Review</option>
+                                                    <option value="resolved">Resolved</option>
+                                                    <option value="rejected">Rejected</option>
+                                                </select>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}
@@ -198,6 +208,71 @@ const AdminDashboard = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Details Modal */}
+            {selectedComplaint && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" onClick={() => setSelectedComplaint(null)}>
+                    <div className="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex justify-between items-start mb-6">
+                            <div>
+                                <h2 className="text-2xl font-bold text-slate-900">Complaint Details</h2>
+                                <p className="text-sm text-slate-500 mt-1">Ref ID: #{selectedComplaint.reference_id}</p>
+                            </div>
+                            <button
+                                onClick={() => setSelectedComplaint(null)}
+                                className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
+
+                        <div className="space-y-4">
+                            <div>
+                                <label className="text-sm font-semibold text-slate-600">Ministry</label>
+                                <p className="text-slate-900 mt-1">{selectedComplaint.ministry}</p>
+                            </div>
+
+                            <div>
+                                <label className="text-sm font-semibold text-slate-600">Location</label>
+                                <p className="text-slate-900 mt-1">{selectedComplaint.location || 'Unspecified'}</p>
+                            </div>
+
+                            <div>
+                                <label className="text-sm font-semibold text-slate-600">Official Name</label>
+                                <p className="text-slate-900 mt-1">{selectedComplaint.official_name || 'Not provided'}</p>
+                            </div>
+
+                            <div>
+                                <label className="text-sm font-semibold text-slate-600">Complaint Details</label>
+                                <p className="text-slate-900 mt-1 whitespace-pre-wrap bg-slate-50 p-4 rounded-lg">{selectedComplaint.details}</p>
+                            </div>
+
+                            <div>
+                                <label className="text-sm font-semibold text-slate-600">Phone Number</label>
+                                <p className="text-slate-900 mt-1">{selectedComplaint.phone_number || 'Not provided'}</p>
+                            </div>
+
+                            <div>
+                                <label className="text-sm font-semibold text-slate-600">Submitted</label>
+                                <p className="text-slate-900 mt-1">{new Date(selectedComplaint.created_at).toLocaleString()}</p>
+                            </div>
+
+                            <div>
+                                <label className="text-sm font-semibold text-slate-600">Status</label>
+                                <p className="mt-1">
+                                    <span className={`px-3 py-1 rounded-full text-sm font-semibold capitalize
+                                        ${selectedComplaint.status === 'submitted' ? 'bg-blue-100 text-blue-700' :
+                                            selectedComplaint.status === 'in_review' ? 'bg-amber-100 text-amber-700' :
+                                                selectedComplaint.status === 'resolved' ? 'bg-emerald-100 text-emerald-700' :
+                                                    'bg-red-100 text-red-700'}`}>
+                                        {selectedComplaint.status.replace('_', ' ')}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
