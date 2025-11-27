@@ -67,12 +67,17 @@ const AdminDashboard = () => {
     const ministryData = analytics && analytics.by_ministry ? Object.entries(analytics.by_ministry).map(([name, value]) => ({ name, value })) : [];
     const COLORS = ['#3b82f6', '#f59e0b', '#10b981', '#ef4444'];
 
+import logo from '../assets/logo.png';
+
     return (
         <div className="min-h-screen bg-slate-100 p-6">
             <div className="max-w-7xl mx-auto space-y-6">
                 {/* Header */}
                 <div className="flex justify-between items-center bg-white p-4 rounded-xl shadow-sm">
-                    <h1 className="text-2xl font-bold text-slate-800">Ombudsman Dashboard</h1>
+                    <div className="flex items-center space-x-3">
+                        <img src={logo} alt="Logo" className="w-10 h-10 object-contain" />
+                        <h1 className="text-2xl font-bold text-slate-800">Ombudsman Dashboard</h1>
+                    </div>
                     <div className="flex items-center space-x-4">
                         <button onClick={fetchData} className="p-2 hover:bg-slate-100 rounded-lg text-slate-600 transition-colors">
                             <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
