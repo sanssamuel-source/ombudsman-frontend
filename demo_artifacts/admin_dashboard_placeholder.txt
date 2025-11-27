@@ -1,0 +1,6 @@
+[IMAGE PLACEHOLDER]
+Filename: admin_dashboard_mockup.png
+Description: This image could not be generated because the AI image generation quota has been exhausted.
+Intended Content: A UI mockup of the Admin Dashboard showing:
+1. Analytics panel with updated counts (1 Submitted, 1 Resolved).
+2. The complaints table showing the complaint 'A1B2C3D4' with status 'Resolved' (Green badge).
