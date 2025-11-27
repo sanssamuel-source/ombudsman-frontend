@@ -2,9 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .database import engine, Base
 from .routers import public, admin
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # Create tables
 Base.metadata.create_all(bind=engine)
