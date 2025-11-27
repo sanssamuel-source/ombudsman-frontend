@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { LogOut, RefreshCw, Filter } from 'lucide-react';
+import { LOGO_BASE64 } from '../assets/LogoBase64';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
@@ -47,7 +48,7 @@ const AdminDashboard = () => {
                 { status: newStatus },
                 { headers: { 'x-admin-token': token } }
             );
-            fetchData(); // Refresh data
+            fetchData();
         } catch (error) {
             console.error('Error updating status:', error);
             alert('Failed to update status');
@@ -66,8 +67,6 @@ const AdminDashboard = () => {
     const statusData = analytics ? Object.entries(analytics.by_status).map(([name, value]) => ({ name, value })) : [];
     const ministryData = analytics && analytics.by_ministry ? Object.entries(analytics.by_ministry).map(([name, value]) => ({ name, value })) : [];
     const COLORS = ['#3b82f6', '#f59e0b', '#10b981', '#ef4444'];
-
-import { LOGO_BASE64 } from '../assets/LogoBase64';
 
     return (
         <div className="min-h-screen bg-slate-100 p-6">
@@ -143,6 +142,38 @@ import { LOGO_BASE64 } from '../assets/LogoBase64';
                                 <option value="rejected">Rejected</option>
                             </select>
                         </div>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                            <thead className="bg-slate-50 text-slate-500 text-xs uppercase font-medium">
+                                <tr>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Ref ID</th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Ministry</th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Location</th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Date</th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Status</th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100">
+                                {filteredComplaints.map((complaint) => (
+                                    <tr key={complaint.reference_id} className="hover:bg-slate-50 transition-colors">
+                                        <td className="px-6 py-4 font-mono text-sm text-slate-500">#{complaint.reference_id}</td>
+                                        <td className="px-6 py-4 text-slate-800 font-medium">{complaint.ministry}</td>
+                                        <td className="px-6 py-4 text-slate-600">{complaint.location || 'Unspecified'}</td>
+                                        <td className="px-6 py-4 text-slate-500 text-sm">{new Date(complaint.created_at).toLocaleDateString()}</td>
+                                        <td className="px-6 py-4">
+                                            <span className={`px-2 py-1 rounded-full text-xs font-semibold capitalize
+                        ${complaint.status === 'submitted' ? 'bg-blue-100 text-blue-700' :
+                                                    complaint.status === 'in_review' ? 'bg-amber-100 text-amber-700' :
+                                                        complaint.status === 'resolved' ? 'bg-emerald-100 text-emerald-700' :
+                                                            'bg-red-100 text-red-700'}`}>
+                                                {complaint.status.replace('_', ' ')}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <select
                                                 className="bg-white border border-slate-200 rounded px-2 py-1 text-sm outline-none focus:border-sky-500"
                                                 value={complaint.status}
                                                 onChange={(e) => updateStatus(complaint.reference_id, e.target.value)}
@@ -157,7 +188,7 @@ import { LOGO_BASE64 } from '../assets/LogoBase64';
                                 ))}
                                 {filteredComplaints.length === 0 && (
                                     <tr>
-                                        <td colSpan={5} className="px-6 py-8 text-center text-slate-400">
+                                        <td colSpan={6} className="px-6 py-8 text-center text-slate-400">
                                             No complaints found.
                                         </td>
                                     </tr>
