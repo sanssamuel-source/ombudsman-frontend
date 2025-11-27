@@ -1,8 +1,13 @@
-from fastapi import APIRouter, Form, Depends, Request
+from fastapi import APIRouter, Form, Depends, Request, Response
 from sqlalchemy.orm import Session
 import models, database
 from twilio.twiml.messaging_response import MessagingResponse
 import uuid
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -16,12 +21,15 @@ async def incoming_sms(
     Handle incoming SMS from Twilio.
     Creates a complaint and replies with the Reference ID.
     """
+    logger.info(f"Received SMS from {From}: {Body}")
+
     # 1. Create Complaint
     reference_id = str(uuid.uuid4())[:8].upper()
     
     db_complaint = models.Complaint(
         reference_id=reference_id,
         ministry="Unspecified (SMS)", # Default for SMS
+        location="SMS (Unknown)", # Default for SMS
         details=Body, # Fixed: Model uses 'details', not 'description'
         phone_number=From,
         status="submitted"
@@ -39,4 +47,4 @@ async def incoming_sms(
     # Return XML response for Twilio
     return Response(content=str(resp), media_type="application/xml")
 
-from fastapi import Response
+

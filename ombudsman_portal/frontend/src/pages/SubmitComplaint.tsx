@@ -7,7 +7,6 @@ const SubmitComplaint = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         ministry: '',
-        location: '', // New Field
         official_name: '',
         details: '',
         phone_number: ''
@@ -74,6 +73,40 @@ const SubmitComplaint = () => {
                                 required
                                 rows={5}
                                 className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all resize-none"
+                                placeholder="Describe what happened..."
+                                value={formData.details}
+                                onChange={e => setFormData({ ...formData, details: e.target.value })}
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-2">Phone Number (for SMS updates)</label>
+                            <input
+                                type="tel"
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all"
+                                placeholder="+1234567890"
+                                value={formData.phone_number}
+                                onChange={e => setFormData({ ...formData, phone_number: e.target.value })}
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-4 rounded-lg transition-all flex items-center justify-center space-x-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
+                            {loading ? 'Submitting...' : (
+                                <>
+                                    <span>Submit Complaint</span>
+                                    <Send className="w-4 h-4" />
+                                </>
+                            )}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default SubmitComplaint;
