@@ -22,7 +22,7 @@ async def incoming_sms(
     db_complaint = models.Complaint(
         reference_id=reference_id,
         ministry="Unspecified (SMS)", # Default for SMS
-        description=Body,
+        details=Body, # Fixed: Model uses 'details', not 'description'
         phone_number=From,
         status="submitted"
     )
