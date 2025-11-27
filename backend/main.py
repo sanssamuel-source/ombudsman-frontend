@@ -6,6 +6,14 @@ from routers import public, admin
 # Create tables
 Base.metadata.create_all(bind=engine)
 
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from database import engine, Base
+from routers import public, admin, sms
+
+# Create tables
+Base.metadata.create_all(bind=engine)
+
 app = FastAPI(title="Ombudsman Digital Complaint Portal")
 
 # CORS
@@ -19,6 +27,7 @@ app.add_middleware(
 
 app.include_router(public.router, prefix="/api/public", tags=["Public"])
 app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
+app.include_router(sms.router) # No prefix, handles /sms/incoming, tags=["Admin"])
 
 @app.get("/")
 def read_root():
