@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Shield, FileText, Search } from 'lucide-react';
+import { FileText, Search } from 'lucide-react';
 
 import { LOGO_BASE64 } from '../assets/LogoBase64';
 
