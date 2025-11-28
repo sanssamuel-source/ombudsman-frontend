@@ -5,7 +5,7 @@ from typing import List
 
 router = APIRouter()
 
-ADMIN_TOKEN = "secret-admin-token" # Hardcoded for MVP
+ADMIN_TOKEN = "P@s5w0rd@2026" # Hardcoded for MVP
 
 def verify_admin(x_admin_token: str = Header(...)):
     if x_admin_token != ADMIN_TOKEN:
