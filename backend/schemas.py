@@ -28,6 +28,7 @@ class ComplaintResponse(ComplaintBase):
     status: str
     created_at: datetime
     is_verified: bool = False
+    evidence_data: Optional[str] = None
     audit_logs: List[AuditLogResponse] = []
 
     class Config:

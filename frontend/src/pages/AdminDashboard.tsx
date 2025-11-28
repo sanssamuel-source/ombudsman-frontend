@@ -369,6 +369,12 @@ const AdminDashboard = () => {
                                     </p>
                                 </div>
                                 <div>
+                                    <label className="text-sm font-semibold text-slate-600">NIN</label>
+                                    <p className="text-slate-900 mt-1 font-mono">
+                                        {selectedComplaint.nin || 'Not provided'}
+                                    </p>
+                                </div>
+                                <div>
                                     <label className="text-sm font-semibold text-slate-600">Location</label>
                                     <p className="text-slate-900 mt-1">{selectedComplaint.location || 'Unspecified'}</p>
                                 </div>
