@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ArrowLeft, Send } from 'lucide-react';
+import { ArrowLeft, Send, Upload, ShieldCheck } from 'lucide-react';
 
 const SubmitComplaint = () => {
     const navigate = useNavigate();
@@ -10,9 +10,26 @@ const SubmitComplaint = () => {
         location: '',
         official_name: '',
         details: '',
-        phone_number: ''
+        phone_number: '',
+        evidence: '', // Base64 string
+        nin: ''
     });
     const [loading, setLoading] = useState(false);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) { // 2MB limit
+                alert("File size too large. Please upload an image under 2MB.");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setFormData({ ...formData, evidence: reader.result as string });
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -107,6 +124,37 @@ const SubmitComplaint = () => {
                                 value={formData.details}
                                 onChange={e => setFormData({ ...formData, details: e.target.value })}
                             />
+                        </div>
+
+                        {/* New Fields: Evidence & NIN */}
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label className="block text-sm font-medium text-slate-700 mb-2">
+                                    <span className="flex items-center"><Upload className="w-4 h-4 mr-1"/> Photo Evidence (Optional)</span>
+                                </label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleFileChange}
+                                    className="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100"
+                                />
+                                {formData.evidence && <p className="text-xs text-green-600 mt-1">Image attached successfully.</p>}
+                            </div>
+                            
+                            <div>
+                                <label className="block text-sm font-medium text-slate-700 mb-2">
+                                    <span className="flex items-center"><ShieldCheck className="w-4 h-4 mr-1"/> National ID (NIN) (Optional)</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    maxLength={11}
+                                    className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all"
+                                    placeholder="11-digit NIN"
+                                    value={formData.nin}
+                                    onChange={e => setFormData({ ...formData, nin: e.target.value })}
+                                />
+                                {formData.nin.length === 11 && <p className="text-xs text-green-600 mt-1">Format valid.</p>}
+                            </div>
                         </div>
 
                         <div>

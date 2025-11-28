@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, Boolean
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from database import Base
@@ -19,6 +19,12 @@ class Complaint(Base):
     phone_number = Column(String, nullable=True)
     status = Column(String, default="submitted") # submitted, in_review, resolved, rejected
     created_at = Column(DateTime, default=datetime.utcnow)
+    
+    # Stretch Goals
+    evidence_data = Column(Text, nullable=True) # Base64 encoded image
+    evidence_content_type = Column(String, nullable=True) # e.g. image/jpeg
+    nin = Column(String, nullable=True)
+    is_verified = Column(Boolean, default=False)
 
     audit_logs = relationship("AuditLog", back_populates="complaint")
 
