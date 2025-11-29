@@ -32,7 +32,7 @@ const AdminDashboard = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || '/api';
             const [complaintsRes, analyticsRes] = await Promise.all([
                 axios.get(`${backendUrl}/admin/complaints`, { headers: { 'x-admin-token': token } }),
                 axios.get(`${backendUrl}/admin/analytics`, { headers: { 'x-admin-token': token } })
@@ -52,15 +52,15 @@ const AdminDashboard = () => {
 
     const updateStatus = async (refId: string, newStatus: string) => {
         try {
-            const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || '/api';
             await axios.patch(`${backendUrl}/admin/complaint/${refId}/status`,
                 { status: newStatus },
                 { headers: { 'x-admin-token': token } }
             );
             fetchData();
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error updating status:', error);
-            alert('Failed to update status');
+            alert(`Failed to update status: ${error.response?.data?.detail || error.message}`);
         }
     };
 

@@ -59,13 +59,17 @@ const SubmitComplaint = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+            // Default to /api if env var is missing (works for Vercel monorepo & local proxy)
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || '/api';
+            console.log('Submitting to:', `${backendUrl}/public/complaint`); // Debug log
+            
             const response = await axios.post(`${backendUrl}/public/complaint`, formData);
             alert(`Complaint Submitted! Your Reference ID is: ${response.data.reference_id}`);
             navigate('/');
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error submitting complaint:', error);
-            alert('Failed to submit complaint. Please try again.');
+            const errorMessage = error.response?.data?.detail || error.message || 'Unknown error';
+            alert(`Failed to submit complaint. Error: ${errorMessage}`);
         } finally {
             setLoading(false);
         }

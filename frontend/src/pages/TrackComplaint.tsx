@@ -17,11 +17,12 @@ const TrackComplaint = () => {
         setComplaint(null);
 
         try {
-            const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || '/api';
             const response = await axios.get(`${backendUrl}/public/complaint/${refId}`);
             setComplaint(response.data);
-        } catch (err) {
-            setError('Complaint not found. Please check your Reference ID.');
+        } catch (err: any) {
+            console.error('Track error:', err);
+            setError(err.response?.data?.detail || 'Complaint not found. Please check your Reference ID.');
         } finally {
             setLoading(false);
         }
