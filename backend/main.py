@@ -17,10 +17,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(public.router, prefix="/public", tags=["Public"])
-app.include_router(admin.router, prefix="/admin", tags=["Admin"])
+app.include_router(public.router, prefix="/api/public", tags=["Public"])
+app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
 app.include_router(sms.router, tags=["SMS"])
-app.include_router(ussd.router, prefix="/ussd", tags=["USSD"])
+app.include_router(ussd.router, prefix="/api/ussd", tags=["USSD"])
 
 @app.get("/")
 def read_root():
