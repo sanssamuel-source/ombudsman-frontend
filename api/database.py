@@ -4,11 +4,12 @@ from sqlalchemy.orm import sessionmaker
 
 import os
 
-# Check if running on Vercel
-if os.environ.get("VERCEL"):
-    SQLALCHEMY_DATABASE_URL = "sqlite:////tmp/ombudsman.db"
-else:
+# Robust check for writable directory
+if os.name == 'nt': # Windows (Local Development)
     SQLALCHEMY_DATABASE_URL = "sqlite:///./ombudsman.db"
+else: # Linux (Vercel / Production)
+    # Vercel file system is read-only except for /tmp
+    SQLALCHEMY_DATABASE_URL = "sqlite:////tmp/ombudsman.db"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
