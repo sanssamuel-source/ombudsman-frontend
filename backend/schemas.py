@@ -19,6 +19,8 @@ class ComplaintBase(BaseModel):
     phone_number: Optional[str] = None
     evidence: Optional[str] = None # Base64
     nin: Optional[str] = None
+    latitude: Optional[str] = None
+    longitude: Optional[str] = None
 
 class ComplaintCreate(ComplaintBase):
     pass
@@ -29,6 +31,9 @@ class ComplaintResponse(ComplaintBase):
     created_at: datetime
     is_verified: bool = False
     evidence_data: Optional[str] = None
+    ai_category: Optional[str] = None
+    urgency_score: int = 5
+    sentiment: str = "neutral"
     audit_logs: List[AuditLogResponse] = []
 
     class Config:

@@ -13,10 +13,32 @@ def submit_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(d
     if evidence:
         complaint_data['evidence_data'] = evidence
     
+    # Remove GPS coordinates from complaint_data if they're None (avoid validation issues)
+    # They'll be set to None by default in the model
+    if complaint_data.get('latitude') is None:
+        complaint_data.pop('latitude', None)
+    if complaint_data.get('longitude') is None:
+        complaint_data.pop('longitude', None)
+    
     # Mock NIN Verification
     nin = complaint_data.get('nin')
     if nin and len(nin) == 11 and nin.isdigit():
         complaint_data['is_verified'] = True
+    
+    # AI-Powered Analytics (Safe - will set defaults if analysis fails)
+    try:
+        from ai_analytics import analyze_complaint
+        ai_insights = analyze_complaint(
+            complaint_data.get('details', ''),
+            complaint_data.get('ministry', '')
+        )
+        complaint_data.update(ai_insights)
+    except Exception as e:
+        print(f"[AI ANALYSIS WARNING] {str(e)} - Using defaults")
+        # Set safe defaults if AI fails
+        complaint_data['ai_category'] = 'general'
+        complaint_data['urgency_score'] = 5
+        complaint_data['sentiment'] = 'neutral'
     
     db_complaint = models.Complaint(**complaint_data)
     db.add(db_complaint)

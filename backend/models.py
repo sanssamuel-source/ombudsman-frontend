@@ -20,11 +20,21 @@ class Complaint(Base):
     status = Column(String, default="submitted") # submitted, in_review, resolved, rejected
     created_at = Column(DateTime, default=datetime.utcnow)
     
+    
     # Stretch Goals
     evidence_data = Column(Text, nullable=True) # Base64 encoded image
     evidence_content_type = Column(String, nullable=True) # e.g. image/jpeg
     nin = Column(String, nullable=True)
     is_verified = Column(Boolean, default=False)
+    
+    # Geolocation Features
+    latitude = Column(String, nullable=True) # GPS latitude
+    longitude = Column(String, nullable=True) # GPS longitude
+    
+    # AI-Powered Analytics
+    ai_category = Column(String, nullable=True) # Auto-detected category
+    urgency_score = Column(Integer, default=5) # 1-10 scale
+    sentiment = Column(String, default="neutral") # positive, negative, neutral
 
     audit_logs = relationship("AuditLog", back_populates="complaint")
 
