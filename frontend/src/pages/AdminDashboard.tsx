@@ -32,9 +32,10 @@ const AdminDashboard = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
             const [complaintsRes, analyticsRes] = await Promise.all([
-                axios.get('/api/admin/complaints', { headers: { 'x-admin-token': token } }),
-                axios.get('/api/admin/analytics', { headers: { 'x-admin-token': token } })
+                axios.get(`${backendUrl}/admin/complaints`, { headers: { 'x-admin-token': token } }),
+                axios.get(`${backendUrl}/admin/analytics`, { headers: { 'x-admin-token': token } })
             ]);
             setComplaints(complaintsRes.data);
             setAnalytics(analyticsRes.data);
@@ -51,7 +52,8 @@ const AdminDashboard = () => {
 
     const updateStatus = async (refId: string, newStatus: string) => {
         try {
-            await axios.patch(`/api/admin/complaint/${refId}/status`,
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+            await axios.patch(`${backendUrl}/admin/complaint/${refId}/status`,
                 { status: newStatus },
                 { headers: { 'x-admin-token': token } }
             );

@@ -17,7 +17,8 @@ const TrackComplaint = () => {
         setComplaint(null);
 
         try {
-            const response = await axios.get(`/api/public/complaint/${refId}`);
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+            const response = await axios.get(`${backendUrl}/public/complaint/${refId}`);
             setComplaint(response.data);
         } catch (err) {
             setError('Complaint not found. Please check your Reference ID.');
