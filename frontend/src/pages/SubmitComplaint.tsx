@@ -12,9 +12,33 @@ const SubmitComplaint = () => {
         details: '',
         phone_number: '',
         evidence: '', // Base64 string
-        nin: ''
+        nin: '',
+        latitude: null as string | null,
+        longitude: null as string | null
     });
     const [loading, setLoading] = useState(false);
+    const [gpsStatus, setGpsStatus] = useState<'not_requested' | 'capturing' | 'captured' | 'denied'>('not_requested');
+
+    // Capture GPS coordinates on component mount
+    React.useEffect(() => {
+        if ('geolocation' in navigator) {
+            setGpsStatus('capturing');
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setFormData(prev => ({
+                        ...prev,
+                        latitude: position.coords.latitude.toString(),
+                        longitude: position.coords.longitude.toString()
+                    }));
+                    setGpsStatus('captured');
+                },
+                (error) => {
+                    console.log('Geolocation denied or unavailable:', error.message);
+                    setGpsStatus('denied');
+                }
+            );
+        }
+    }, []);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
