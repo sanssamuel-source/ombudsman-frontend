@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from database import Base
+from .database import Base
 import uuid
 
 def generate_reference_id():
@@ -13,28 +13,11 @@ class Complaint(Base):
     id = Column(Integer, primary_key=True, index=True)
     reference_id = Column(String, unique=True, index=True, default=generate_reference_id)
     ministry = Column(String, index=True)
-    location = Column(String, index=True, default="Unspecified") # New Field
     official_name = Column(String)
     details = Column(Text)
     phone_number = Column(String, nullable=True)
     status = Column(String, default="submitted") # submitted, in_review, resolved, rejected
     created_at = Column(DateTime, default=datetime.utcnow)
-    
-    
-    # Stretch Goals
-    evidence_data = Column(Text, nullable=True) # Base64 encoded image
-    evidence_content_type = Column(String, nullable=True) # e.g. image/jpeg
-    nin = Column(String, nullable=True)
-    is_verified = Column(Boolean, default=False)
-    
-    # Geolocation Features
-    latitude = Column(String, nullable=True) # GPS latitude
-    longitude = Column(String, nullable=True) # GPS longitude
-    
-    # AI-Powered Analytics
-    ai_category = Column(String, nullable=True) # Auto-detected category
-    urgency_score = Column(Integer, default=5) # 1-10 scale
-    sentiment = Column(String, default="neutral") # positive, negative, neutral
 
     audit_logs = relationship("AuditLog", back_populates="complaint")
 
