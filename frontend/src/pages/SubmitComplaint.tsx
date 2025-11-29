@@ -164,6 +164,13 @@ const SubmitComplaint = () => {
                                     className="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100"
                                 />
                                 {formData.evidence && <p className="text-xs text-green-600 mt-1">Image attached successfully.</p>}
+                                
+                                {/* GPS Status Indicator */}
+                                <div className="mt-2 flex items-center text-xs">
+                                    {gpsStatus === 'capturing' && <span className="text-amber-600">Acquiring location...</span>}
+                                    {gpsStatus === 'captured' && <span className="text-green-600">Location attached automatically.</span>}
+                                    {gpsStatus === 'denied' && <span className="text-slate-400">Location access denied (optional).</span>}
+                                </div>
                             </div>
                             
                             <div>
