@@ -35,7 +35,8 @@ const SubmitComplaint = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('/api/public/complaint', formData);
+            const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+            const response = await axios.post(`${backendUrl}/public/complaint`, formData);
             alert(`Complaint Submitted! Your Reference ID is: ${response.data.reference_id}`);
             navigate('/');
         } catch (error) {
