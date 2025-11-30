@@ -15,7 +15,7 @@ def submit_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(d
     except Exception as e:
         print(f"Error submitting complaint: {str(e)}")
         db.rollback()
-        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
 
 @router.get("/complaint/{reference_id}", response_model=schemas.ComplaintResponse)
 def track_complaint(reference_id: str, db: Session = Depends(database.get_db)):

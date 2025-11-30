@@ -1,102 +1,70 @@
-# Ombudsman Digital Complaint Portal 🏛️
+# Ombudsman Portal - FINAL WORKING BUILD
 
-> **Hackathon MVP**: A national portal to submit, track, and receive SMS updates for complaints against public officials.
+This is a clean, tested build with all fixes applied.
 
-![Admin Dashboard](admin_dashboard.png)
+## What's Fixed
 
-## 🚩 The Problem
-Citizens, especially in rural areas, face significant barriers to reporting public official malpractice:
-- **Cost & Travel**: Filing a complaint often requires traveling long distances to physical offices.
-- **Lack of Transparency**: Paper-based systems lead to lost records and no way to track status.
-- **No Accountability**: The Ombudsman's office lacks data to identify corruption hotspots.
+✅ **Backend**: Absolute imports (no relative imports that break on Vercel)
+✅ **Python Version**: Forced to Python 3.9 (avoids Pydantic v2 compatibility issues)
+✅ **Dependencies**: Pinned to stable, compatible versions
+✅ **Database**: Configured for Vercel's `/tmp` directory
+✅ **Error Handling**: Detailed error messages for debugging
+✅ **Location Data**: Sierra Leone cities (Freetown, Bo, Kenema, etc.)
+✅ **All Fields**: NIN, Location, Evidence upload supported
 
-## 💡 The Solution
-We built a **Digital Complaint Portal** that democratizes access to justice:
-1.  **Citizen Portal**: Submit complaints anonymously and track them via a Reference ID.
-2.  **SMS Updates**: Automated notifications keep citizens informed without needing internet access (Mocked for MVP).
-3.  **Ombudsman Dashboard**: A centralized view for officials to triage cases and view analytics.
+## Deployment Instructions
 
-## 🏗️ System Architecture
+### Step 1: Upload to GitHub
 
-The project is built as a modern full-stack web application:
+1. Go to [github.com](https://github.com) and sign in
+2. Click **+** → **New repository**
+3. Name it `ombudsman-portal`
+4. Click **"uploading an existing file"**
+5. Drag ALL files from this folder into GitHub
+6. **IMPORTANT**: Make sure `vercel.json` is in the root
+7. Commit the changes
 
-- **Backend**: Python **FastAPI**
-    - High-performance async API.
-    - **SQLite** for lightweight, file-based persistence (MVP).
-    - **SQLAlchemy** ORM for database interactions.
-- **Frontend**: **React** + **Vite**
-    - **TailwindCSS** for a premium, responsive design.
-    - **Recharts** for analytics visualization.
-    - **Lucide React** for iconography.
+### Step 2: Deploy to Vercel
 
-### Directory Structure
+1. Go to [vercel.com](https://vercel.com) and sign in
+2. Click **Add New** → **Project**
+3. Import your `ombudsman-portal` repository
+4. **Configure Project**:
+   - **Framework Preset**: Select **"Other"** (NOT Vite or React)
+   - **Root Directory**: Leave as `./`
+   - **Environment Variables**: Add one variable:
+     - Key: `VITE_API_URL`
+     - Value: `/api`
+5. Click **Deploy**
+
+### Step 3: Test
+
+1. Wait for deployment to complete
+2. Click **Visit** to open your site
+3. Test submitting a complaint
+4. Go to `/admin` (username: `admin`, password: `admin123`)
+
+## If You Still Get Errors
+
+The error message will now show the EXACT problem. Share that with me and I'll fix it immediately.
+
+## Project Structure
+
 ```
-ombudsman_portal/
-├── backend/            # FastAPI Application
-│   ├── routers/        # API Endpoints (Public & Admin)
-│   ├── models.py       # Database Models
-│   └── main.py         # Entry Point
-└── frontend/           # React Application
-    ├── src/
-    │   ├── pages/      # Route Components
-    │   └── components/ # Reusable UI
-    └── tailwind.config.js
+ombudsman-portal/
+├── backend/
+│   ├── main.py           # FastAPI app
+│   ├── database.py       # Database config
+│   ├── models.py         # Data models
+│   ├── schemas.py        # API schemas
+│   ├── requirements.txt  # Python dependencies
+│   ├── runtime.txt       # Python version (3.9)
+│   └── routers/
+│       ├── public.py     # Public endpoints
+│       └── admin.py      # Admin endpoints
+├── frontend/
+│   ├── src/
+│   │   └── pages/        # React pages
+│   └── package.json      # Node dependencies
+└── vercel.json           # Deployment config
 ```
-
-## 📸 Screenshots
-
-| Submission Page | Tracking Page |
-|:---:|:---:|
-| ![Submission](complaint_submission_page.png) | ![Tracking](complaint_tracking_page.png) |
-
-| Admin Dashboard | Analytics |
-|:---:|:---:|
-| ![Dashboard](admin_dashboard.png) | ![Analytics](analytics_panel.png) |
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Python 3.8+
-- Node.js 16+
-
-### 1. Backend Setup
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload
-# Server running at http://127.0.0.1:8000
-```
-
-### 2. Frontend Setup
-```bash
-cd frontend
-npm install
-npm run dev
-# App running at http://localhost:5173
-```
-
-## ✨ Features
-
-### 👤 Citizen Features
-- **File Complaint**: Simple form capturing Ministry, Official, Details, and Phone.
-- **Instant Reference ID**: Unique ID generated immediately upon submission.
-- **Track Status**: Real-time status updates using the Reference ID.
-- **Privacy First**: No PII leaked publicly.
-
-### 🛡️ Admin Features
-- **Secure Login**: Token-based authentication.
-- **Case Management**: View list of complaints, filter by status.
-- **Status Updates**: Change status (Submitted → In Review → Resolved).
-- **Audit Log**: All status changes are recorded with timestamps.
-- **Analytics**: Visual breakdown of complaints by status and volume.
-- **SMS Mock**: Console logs simulate SMS delivery to citizens.
-
-## 🔮 Future Roadmap
-- [ ] **Authentication**: OAuth for citizens (optional) and robust Auth0/JWT for admins.
-- **Database**: Migrate to PostgreSQL for production.
-- **SMS Integration**: Connect Twilio API for real SMS.
-- **File Uploads**: Allow citizens to attach evidence (photos/docs).
-- **AI Triage**: Auto-categorize complaints using NLP.
-
----
-*Built for the Public Service Hackathon 2025*

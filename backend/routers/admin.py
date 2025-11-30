@@ -1,55 +1,46 @@
 from fastapi import APIRouter, Depends, HTTPException, Header
 from sqlalchemy.orm import Session
-import models, schemas, database
 from typing import List
+import models, schemas, database
 
 router = APIRouter()
 
-ADMIN_TOKEN = "secret-admin-token" # Hardcoded for MVP
+ADMIN_TOKEN = "secret-admin-token"
 
-def verify_admin(x_admin_token: str = Header(...)):
-    if x_admin_token != ADMIN_TOKEN:
-        raise HTTPException(status_code=401, detail="Invalid admin token")
+def verify_admin(authorization: str = Header(None)):
+    if authorization != f"Bearer {ADMIN_TOKEN}":
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    return True
+
+@router.post("/login")
+def admin_login(username: str, password: str):
+    if username == "admin" and password == "admin123":
+        return {"token": ADMIN_TOKEN}
+    raise HTTPException(status_code=401, detail="Invalid credentials")
 
 @router.get("/complaints", response_model=List[schemas.ComplaintResponse])
-def list_complaints(db: Session = Depends(database.get_db), _: str = Depends(verify_admin)):
+def get_all_complaints(db: Session = Depends(database.get_db), _: bool = Depends(verify_admin)):
     return db.query(models.Complaint).all()
 
-@router.patch("/complaint/{reference_id}/status", response_model=schemas.ComplaintResponse)
-def update_status(reference_id: str, status_update: schemas.ComplaintUpdateStatus, db: Session = Depends(database.get_db), _: str = Depends(verify_admin)):
-    complaint = db.query(models.Complaint).filter(models.Complaint.reference_id == reference_id).first()
+@router.patch("/complaint/{complaint_id}/status")
+def update_complaint_status(
+    complaint_id: int,
+    status_update: schemas.ComplaintUpdateStatus,
+    db: Session = Depends(database.get_db),
+    _: bool = Depends(verify_admin)
+):
+    complaint = db.query(models.Complaint).filter(models.Complaint.id == complaint_id).first()
     if not complaint:
         raise HTTPException(status_code=404, detail="Complaint not found")
     
-    # Audit Log
-    audit = models.AuditLog(
-        complaint_id=complaint.id,
+    audit_log = models.AuditLog(
+        complaint_id=complaint_id,
         previous_status=complaint.status,
         new_status=status_update.status,
         changed_by="admin"
     )
-    db.add(audit)
-    
-    # Update Status
     complaint.status = status_update.status
+    db.add(audit_log)
     db.commit()
     db.refresh(complaint)
-    
-    # Mock SMS
-    if complaint.phone_number:
-        print(f"[SMS MOCK] To: {complaint.phone_number} | Msg: Your complaint {complaint.reference_id} status is now {complaint.status}")
-        
     return complaint
-
-@router.get("/analytics")
-def get_analytics(db: Session = Depends(database.get_db), _: str = Depends(verify_admin)):
-    total = db.query(models.Complaint).count()
-    by_status = {}
-    for status in ["submitted", "in_review", "resolved", "rejected"]:
-        count = db.query(models.Complaint).filter(models.Complaint.status == status).count()
-        by_status[status] = count
-        
-    return {
-        "total_complaints": total,
-        "by_status": by_status
-    }

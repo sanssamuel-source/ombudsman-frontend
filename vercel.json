@@ -15,13 +15,5 @@
     { "source": "/assets/(.*)", "destination": "/frontend/assets/$1" },
     { "source": "/vite.svg", "destination": "/frontend/vite.svg" },
     { "source": "/(.*)", "destination": "/frontend/index.html" }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    }
   ]
 }
