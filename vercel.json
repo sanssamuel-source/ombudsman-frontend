@@ -12,7 +12,7 @@
   ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/backend/main.py" },
-    { "source": "/(.*)", "destination": "/frontend/index.html" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
     {
