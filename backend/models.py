@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from database import Base
+from .database import Base
 import uuid
 
 def generate_reference_id():
@@ -16,10 +16,7 @@ class Complaint(Base):
     official_name = Column(String)
     details = Column(Text)
     phone_number = Column(String, nullable=True)
-    nin = Column(String, nullable=True)
-    location = Column(String, nullable=True)
-    evidence = Column(Text, nullable=True)
-    status = Column(String, default="submitted")
+    status = Column(String, default="submitted") # submitted, in_review, resolved, rejected
     created_at = Column(DateTime, default=datetime.utcnow)
 
     audit_logs = relationship("AuditLog", back_populates="complaint")
@@ -31,7 +28,7 @@ class AuditLog(Base):
     complaint_id = Column(Integer, ForeignKey("complaints.id"))
     previous_status = Column(String)
     new_status = Column(String)
-    changed_by = Column(String)
+    changed_by = Column(String) # "admin" or "system"
     timestamp = Column(DateTime, default=datetime.utcnow)
 
     complaint = relationship("Complaint", back_populates="audit_logs")
