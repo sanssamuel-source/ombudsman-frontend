@@ -16,117 +16,36 @@
 
 ![OmbudsLink Logo](ombudslink_logo_1764245597086.png)
 
-Presentation Video (Max 3 minutes)
+---
 
-Here is your exact presentation script for recording the 3-minute pitch:
+## 🎬 Presentation Video Script (Max 3 Minutes)
 
-🎤 Pitch Video Script (3 Minutes)
+**Target Audience**: Judges, Government Stakeholders, Investors.
+**Tone**: Inspiring, Urgent, Professional.
 
-Slide 1 — Title
-“Hello judges, we are Samuel, Debbie, and Tonny from Freetown. This is OmbudsPortal — a national digital complaint portal designed for accountability and transparency.”
+| Time          | Visual / Scene                                                                                                  | Audio / Narration                                                                                                                                                                                                       |
+| :------------ | :-------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **0:00-0:20** | **[Scene: Stock footage of a busy government office or a rural road]**<br>Text overlay: _"The Cost of Silence"_ | **Narrator**: "Imagine traveling 50 miles from a rural village to Freetown, losing a day's wage, just to report an unfair fee... only to find the office closed or your file 'lost'."                                   |
+| **0:20-0:40** | **[Scene: Person looking frustrated at a pile of papers]**<br>Cut to: **[OmbudsLink Logo animation]**           | **Narrator**: "For too long, the barrier to justice has been distance, cost, and fear. But today, we change that. Introducing **OmbudsLink**."                                                                          |
+| **0:40-1:10** | **[Screen Recording: Citizen Landing Page]**<br>Cursor clicks 'File Complaint'. Shows the simple form.          | **Narrator**: "OmbudsLink is the bridge between citizens and the Ombudsman. With just a few clicks, any citizen can file a complaint—anonymously and securely. No travel required. No bribes to pay."                   |
+| **1:10-1:40** | **[Screen Recording: SMS Notification on a phone]**<br>Text: _"Your Case #12345 is now In Review"_              | **Narrator**: "We know internet access isn't universal. That's why OmbudsLink is built with an SMS-first mindset. Citizens receive real-time updates on their basic phones. They are never left in the dark."           |
+| **1:40-2:10** | **[Screen Recording: Admin Dashboard]**<br>Show charts, graphs, and the 'Resolve' button.                       | **Narrator**: "For the government, OmbudsLink provides a powerful Dashboard. Officials can triage cases, spot corruption hotspots with real-time analytics, and ensure every voice is heard and every case is counted." |
+| **2:10-2:40** | **[Scene: Team photo or video of Samuel, Debbie, and Tonny working]**                                           | **Narrator**: "Built by Samuel, Debbie, and Tonny right here in Freetown, we are committed to the Public Service Architecture Revamp. We aren't just building an app; we are building trust."                           |
+| **2:40-3:00** | **[Scene: OmbudsLink Logo with URL]**<br>Text: _"Justice at your fingertips."_                                  | **Narrator**: "OmbudsLink. Transparency. Accountability. Justice at your fingertips. Thank you."                                                                                                                        |
 
-Slide 2 — The Problem
-“Today, citizens in Sierra Leone have no simple or transparent way to file complaints against public officials.
-Most have to travel long distances, spend money, and file paper forms that often disappear with no feedback.
+---
 
-The Ombudsman’s office also struggles with manual recording, no analytics, and limited visibility across ministries.”
+## 🛠️ Technical Overview Video Script (Max 3 Minutes)
 
-Slide 3 — Our Solution
-“OmbudsPortal digitizes the entire complaint process.
-Citizens can submit a complaint from any phone, get a reference ID instantly, and track the status online.
+**Target Audience**: Technical Judges, Developers.
+**Tone**: Confident, Technical, Concise.
 
-They also receive SMS updates as the case moves through review, investigation, and resolution.”
-
-Slide 4 — For Government
-“OmbudsPortal provides the Ombudsman with a secure admin dashboard, real-time analytics, a case management workflow, and ministry-level transparency.
-This helps identify misconduct hotspots and improve service delivery across government.”
-
-Slide 5 — Demo Overview
-"In our demo, you’ll see:
-
-A simple mobile-first complaint form
-
-Automatic reference ID generation
-
-A public tracking page
-
-An admin dashboard to review complaints
-
-Status update workflow with SMS notifications
-
-Basic analytics showing trends”
-
-Slide 6 — Impact
-“OmbudsPortal reduces the complaint process from days to minutes, increases transparency, and enables real accountability.
-This directly supports the government's Public Service Architecture Revamp initiative.”
-
-Slide 7 — Closing
-“Thank you for reviewing our submission.
-We look forward to the opportunity to pilot OmbudsPortal with the Ombudsman’s Office and help strengthen national accountability.”
-
-Add Video Link Here
-
-👉 Paste YouTube/Google Drive link after recording
-
-8️⃣ Technical Overview Video (Max 3 minutes)
-
-Below is the technical video script:
-
-🧑‍💻 Technical Video Script (3 Minutes)
-
-Slide 1 — System Overview
-“OmbudsPortal is built as a lightweight full-stack application using React for the frontend, FastAPI for the backend, and SQLite for the MVP database.”
-
-Slide 2 — Architecture Summary
-“The system has three main components:
-
-Citizen Interface for submission and tracking
-
-Admin Dashboard for case management
-
-Analytics Engine for ministry insights”
-
-Slide 3 — Backend
-“Our backend uses FastAPI with REST endpoints:
-
-Create complaint
-
-Track by reference ID
-
-List complaints
-
-Update status
-
-Generate analytics
-We included audit logging and SMS mock notifications.”
-
-Slide 4 — Frontend
-“The frontend is a mobile-first React application.
-We built three experiences:
-
-Submission page
-
-Tracking page
-
-Admin dashboard
-
-The interface is optimized for low data usage and rural access.”
-
-Slide 5 — Database & Data Model
-“The MVP uses SQLite, but the application is migration-ready for PostgreSQL during deployment.
-We implemented two main tables: Complaints and Audit Logs.”
-
-Slide 6 — Deployment
-“The system runs locally via Node.js and Python.
-Production-ready hosting targets include Vercel for the frontend and Railway for the backend.”
-
-Slide 7 — Security
-“For MVP, admin access uses a token-based check.
-Future stages include role-based access control, HTTPS enforcement, and encrypted storage.”
-
-Slide 8 — Final Summary
-“This is a functional, end-to-end prototype that meets all hackathon requirements, is fully open source, and is ready for the finalist sprint.”
-
-Add Video Link Here
-
-👉 Paste YouTube/Google Drive link after upload
+| Time          | Visual / Scene                                                                                              | Audio / Narration                                                                                                                                                                                                                                                                                   |
+| :------------ | :---------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **0:00-0:20** | **[Scene: Split screen showing VS Code and the App]**<br>Text: _"Under the Hood of OmbudsLink"_             | **Dev Voice**: "Hi, this is the technical overview of OmbudsLink. We built this platform to be robust, scalable, and secure enough for national deployment."                                                                                                                                        |
+| **0:20-0:50** | **[Screen: Architecture Diagram]**<br>Highlights: React, FastAPI, SQLite/Postgres.                          | **Dev Voice**: "Our architecture is decoupled. The frontend is built with **React and Vite**, ensuring a lightning-fast, responsive experience for users on any device. We use **TailwindCSS** for a mobile-first, accessible design system."                                                       |
+| **0:50-1:20** | **[Screen: Backend Code Snippet - FastAPI Router]**                                                         | **Dev Voice**: "The backend is powered by **FastAPI**. It's high-performance and async-native, capable of handling thousands of concurrent requests. For this MVP, we use SQLite, but the ORM layer with **SQLAlchemy** makes switching to PostgreSQL for production seamless."                     |
+| **1:20-1:50** | **[Screen: Admin Dashboard Analytics]**<br>Zoom in on Recharts graphs.                                      | **Dev Voice**: "Data visualization is key. We integrated **Recharts** to render real-time analytics, giving officials immediate insights into case volumes and resolution times without complex queries."                                                                                           |
+| **1:50-2:20** | **[Screen: Security / Code showing Hashing or Auth]**<br>Text: _"Security & Future Blockchain Integration"_ | **Dev Voice**: "Security is paramount. We implement token-based authentication for admins. To align with the Hackathon's blockchain theme, our architecture is designed to hash complaint records. In Phase 2, these hashes will be committed to a public ledger to ensure immutable audit trails." |
+| **2:20-2:45** | **[Screen: GitHub Repo scrolling]**<br>Text: _"Open Source"_                                                | **Dev Voice**: "The entire codebase is open source and organized for easy contribution. We've prioritized clean code and clear documentation to support the government's open-source policy."                                                                                                       |
+| **2:45-3:00** | **[Scene: Final App View]**<br>Text: _"OmbudsLink - Ready to Deploy"_                                       | **Dev Voice**: "OmbudsLink is not just a prototype; it's a production-ready foundation for digital justice. Thanks for watching."                                                                                                                                                                   |
