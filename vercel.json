@@ -13,7 +13,8 @@
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/backend/main.py" },
     { "source": "/assets/(.*)", "destination": "/frontend/dist/assets/$1" },
-    { "source": "/vite.svg", "destination": "/frontend/dist/vite.svg" },
-    { "source": "/(.*)", "destination": "/frontend/dist/index.html" }
+    { "source": "/", "destination": "/frontend/dist/index.html" },
+    { "source": "/:path*", "destination": "/frontend/dist/index.html" }
   ]
 }
+
