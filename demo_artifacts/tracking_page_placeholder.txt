@@ -1,4 +1,0 @@
-[IMAGE PLACEHOLDER]
-Filename: tracking_page_mockup.png
-Description: This image could not be generated because the AI image generation quota has been exhausted.
-Intended Content: A UI mockup showing the 'Track Status' page with Reference ID 'A1B2C3D4' entered, displaying a status of 'Submitted' (Blue badge) and the complaint details.
