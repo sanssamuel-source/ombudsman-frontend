@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, Header
 from sqlalchemy.orm import Session
-import models, schemas, database
+from .. import models, schemas, database
 from typing import List
 
 router = APIRouter()
 
-ADMIN_TOKEN = "P@s5w0rd@2026" # Hardcoded for MVP
+ADMIN_TOKEN = "secret-admin-token" # Hardcoded for MVP
 
 def verify_admin(x_admin_token: str = Header(...)):
     if x_admin_token != ADMIN_TOKEN:
@@ -35,9 +35,10 @@ def update_status(reference_id: str, status_update: schemas.ComplaintUpdateStatu
     db.commit()
     db.refresh(complaint)
     
-    # Real SMS
+    # SMS Notification
     if complaint.phone_number:
         try:
+            # Try Real SMS if Env Vars exist
             import os
             from twilio.rest import Client
             
@@ -54,10 +55,12 @@ def update_status(reference_id: str, status_update: schemas.ComplaintUpdateStatu
                 )
                 print(f"[SMS SENT] SID: {message.sid}")
             else:
-                print("[SMS ERROR] Missing Twilio credentials")
+                raise Exception("Twilio credentials not found")
         except Exception as e:
-            print(f"[SMS FAILED] {str(e)}")
-        
+            # Fallback to Mock
+            print(f"[SMS MOCK] To: {complaint.phone_number} | Msg: Your complaint {complaint.reference_id} status is now {complaint.status}")
+            print(f"[SMS LOG] Error sending real SMS: {str(e)}")
+            
     return complaint
 
 @router.get("/analytics")
@@ -67,8 +70,17 @@ def get_analytics(db: Session = Depends(database.get_db), _: str = Depends(verif
     for status in ["submitted", "in_review", "resolved", "rejected"]:
         count = db.query(models.Complaint).filter(models.Complaint.status == status).count()
         by_status[status] = count
+
+    # Group by Ministry (Hotspots)
+    # SQLite doesn't have a clean "group by" in ORM without func, doing python-side aggregation for MVP simplicity
+    all_complaints = db.query(models.Complaint).all()
+    by_ministry = {}
+    for c in all_complaints:
+        ministry = c.ministry.strip().title() if c.ministry else "Unknown"
+        by_ministry[ministry] = by_ministry.get(ministry, 0) + 1
         
     return {
         "total_complaints": total,
-        "by_status": by_status
+        "by_status": by_status,
+        "by_ministry": dict(sorted(by_ministry.items(), key=lambda item: item[1], reverse=True)[:5]) # Top 5
     }
