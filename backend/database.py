@@ -1,11 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import os
 
-# Use /tmp for Vercel's ephemeral filesystem
-DB_PATH = "/tmp/ombudsman.db" if os.getenv("VERCEL") else "./ombudsman.db"
-SQLALCHEMY_DATABASE_URL = f"sqlite:///{DB_PATH}"
+SQLALCHEMY_DATABASE_URL = "sqlite:///./ombudsman.db"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}

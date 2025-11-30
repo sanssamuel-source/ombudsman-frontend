@@ -35,10 +35,9 @@ def update_status(reference_id: str, status_update: schemas.ComplaintUpdateStatu
     db.commit()
     db.refresh(complaint)
     
-    # SMS Notification
+    # Real SMS
     if complaint.phone_number:
         try:
-            # Try Real SMS if Env Vars exist
             import os
             from twilio.rest import Client
             
@@ -55,12 +54,10 @@ def update_status(reference_id: str, status_update: schemas.ComplaintUpdateStatu
                 )
                 print(f"[SMS SENT] SID: {message.sid}")
             else:
-                raise Exception("Twilio credentials not found")
+                print("[SMS ERROR] Missing Twilio credentials")
         except Exception as e:
-            # Fallback to Mock
-            print(f"[SMS MOCK] To: {complaint.phone_number} | Msg: Your complaint {complaint.reference_id} status is now {complaint.status}")
-            print(f"[SMS LOG] Error sending real SMS: {str(e)}")
-            
+            print(f"[SMS FAILED] {str(e)}")
+        
     return complaint
 
 @router.get("/analytics")
@@ -70,17 +67,8 @@ def get_analytics(db: Session = Depends(database.get_db), _: str = Depends(verif
     for status in ["submitted", "in_review", "resolved", "rejected"]:
         count = db.query(models.Complaint).filter(models.Complaint.status == status).count()
         by_status[status] = count
-
-    # Group by Ministry (Hotspots)
-    # SQLite doesn't have a clean "group by" in ORM without func, doing python-side aggregation for MVP simplicity
-    all_complaints = db.query(models.Complaint).all()
-    by_ministry = {}
-    for c in all_complaints:
-        ministry = c.ministry.strip().title() if c.ministry else "Unknown"
-        by_ministry[ministry] = by_ministry.get(ministry, 0) + 1
         
     return {
         "total_complaints": total,
-        "by_status": by_status,
-        "by_ministry": dict(sorted(by_ministry.items(), key=lambda item: item[1], reverse=True)[:5]) # Top 5
+        "by_status": by_status
     }
