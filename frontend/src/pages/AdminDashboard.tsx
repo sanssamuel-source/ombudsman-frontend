@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { LogOut, RefreshCw, Filter } from 'lucide-react';
-import { LOGO_BASE64 } from '../assets/LogoBase64';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
@@ -48,7 +47,7 @@ const AdminDashboard = () => {
                 { status: newStatus },
                 { headers: { 'x-admin-token': token } }
             );
-            fetchData();
+            fetchData(); // Refresh data
         } catch (error) {
             console.error('Error updating status:', error);
             alert('Failed to update status');
@@ -73,10 +72,7 @@ const AdminDashboard = () => {
             <div className="max-w-7xl mx-auto space-y-6">
                 {/* Header */}
                 <div className="flex justify-between items-center bg-white p-4 rounded-xl shadow-sm">
-                    <div className="flex items-center space-x-3">
-                        <img src={LOGO_BASE64} alt="Logo" className="w-10 h-10 object-contain" />
-                        <h1 className="text-2xl font-bold text-slate-800">Ombudsman Dashboard</h1>
-                    </div>
+                    <h1 className="text-2xl font-bold text-slate-800">Ombudsman Dashboard</h1>
                     <div className="flex items-center space-x-4">
                         <button onClick={fetchData} className="p-2 hover:bg-slate-100 rounded-lg text-slate-600 transition-colors">
                             <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
@@ -148,20 +144,18 @@ const AdminDashboard = () => {
                         <table className="w-full text-left">
                             <thead className="bg-slate-50 text-slate-500 text-xs uppercase font-medium">
                                 <tr>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Ref ID</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Ministry</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Location</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Date</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Status</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600">Actions</th>
+                                    <th className="px-6 py-4">Ref ID</th>
+                                    <th className="px-6 py-4">Ministry</th>
+                                    <th className="px-6 py-4">Date</th>
+                                    <th className="px-6 py-4">Status</th>
+                                    <th className="px-6 py-4">Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">
                                 {filteredComplaints.map((complaint) => (
                                     <tr key={complaint.reference_id} className="hover:bg-slate-50 transition-colors">
-                                        <td className="px-6 py-4 font-mono text-sm text-slate-500">#{complaint.reference_id}</td>
-                                        <td className="px-6 py-4 text-slate-800 font-medium">{complaint.ministry}</td>
-                                        <td className="px-6 py-4 text-slate-600">{complaint.location || 'Unspecified'}</td>
+                                        <td className="px-6 py-4 font-mono text-sm font-medium text-slate-900">{complaint.reference_id}</td>
+                                        <td className="px-6 py-4 text-slate-600">{complaint.ministry}</td>
                                         <td className="px-6 py-4 text-slate-500 text-sm">{new Date(complaint.created_at).toLocaleDateString()}</td>
                                         <td className="px-6 py-4">
                                             <span className={`px-2 py-1 rounded-full text-xs font-semibold capitalize
@@ -188,7 +182,7 @@ const AdminDashboard = () => {
                                 ))}
                                 {filteredComplaints.length === 0 && (
                                     <tr>
-                                        <td colSpan={6} className="px-6 py-8 text-center text-slate-400">
+                                        <td colSpan={5} className="px-6 py-8 text-center text-slate-400">
                                             No complaints found.
                                         </td>
                                     </tr>
