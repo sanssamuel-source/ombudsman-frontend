@@ -4,7 +4,7 @@ Follow these instructions EXACTLY to deploy your Ombudsman Portal.
 
 ## Phase 1: GitHub Setup
 
-1.  **Download** the `OMBUDSMAN_FINAL_V3.zip` file I provided.
+1.  **Download** the `OMBUDSMAN_PYTHON39_FIX.zip` file I provided.
 2.  **Unzip** the file on your computer. You should see a folder containing `backend`, `frontend`, `vercel.json`, etc.
 3.  **Go to GitHub** (github.com) and sign in.
 4.  Click the **+** icon in the top right and select **New repository**.
