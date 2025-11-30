@@ -12,9 +12,9 @@
   ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/backend/main.py" },
-    { "source": "/assets/(.*)", "destination": "/frontend/dist/assets/$1" },
-    { "source": "/vite.svg", "destination": "/frontend/dist/vite.svg" },
-    { "source": "/(.*)", "destination": "/frontend/dist/index.html" }
+    { "source": "/assets/(.*)", "destination": "/frontend/assets/$1" },
+    { "source": "/vite.svg", "destination": "/frontend/vite.svg" },
+    { "source": "/(.*)", "destination": "/frontend/index.html" }
   ],
   "headers": [
     {

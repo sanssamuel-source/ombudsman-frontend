@@ -11,6 +11,7 @@ const SubmitComplaint = () => {
         details: '',
         phone_number: '',
         nin: '',
+        location: '',
         evidence: ''
     });
     const [loading, setLoading] = useState(false);
@@ -59,15 +60,41 @@ const SubmitComplaint = () => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-2">Ministry / Department</label>
-                            <input
-                                type="text"
+                            <label className="block text-sm font-medium text-slate-700 mb-2">Location</label>
+                            <select
                                 required
-                                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all"
-                                placeholder="e.g. Ministry of Transport"
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all bg-white"
+                                value={formData.location}
+                                onChange={e => setFormData({ ...formData, location: e.target.value })}
+                            >
+                                <option value="">Select Location</option>
+                                <option value="Abuja">Abuja</option>
+                                <option value="Lagos">Lagos</option>
+                                <option value="Kano">Kano</option>
+                                <option value="Port Harcourt">Port Harcourt</option>
+                                <option value="Enugu">Enugu</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-2">Ministry / Department</label>
+                            <select
+                                required
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all bg-white"
                                 value={formData.ministry}
                                 onChange={e => setFormData({ ...formData, ministry: e.target.value })}
-                            />
+                            >
+                                <option value="">Select a Ministry</option>
+                                <option value="Ministry of Transport">Ministry of Transport</option>
+                                <option value="Ministry of Education">Ministry of Education</option>
+                                <option value="Ministry of Health">Ministry of Health</option>
+                                <option value="Ministry of Finance">Ministry of Finance</option>
+                                <option value="Ministry of Works">Ministry of Works</option>
+                                <option value="Police Department">Police Department</option>
+                                <option value="Immigration Office">Immigration Office</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
 
                         <div>

@@ -17,6 +17,7 @@ class Complaint(Base):
     details = Column(Text)
     phone_number = Column(String, nullable=True)
     nin = Column(String, nullable=True)
+    location = Column(String, nullable=True)
     evidence = Column(Text, nullable=True) # Base64 encoded string
     status = Column(String, default="submitted") # submitted, in_review, resolved, rejected
     created_at = Column(DateTime, default=datetime.utcnow)

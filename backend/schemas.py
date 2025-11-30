@@ -8,6 +8,7 @@ class ComplaintBase(BaseModel):
     details: str
     phone_number: Optional[str] = None
     nin: Optional[str] = None
+    location: Optional[str] = None
     evidence: Optional[str] = None
 
 class ComplaintCreate(ComplaintBase):
