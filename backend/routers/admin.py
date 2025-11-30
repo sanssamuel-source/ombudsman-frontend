@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Header
 from sqlalchemy.orm import Session
-from .. import models, schemas, database
+import models, schemas, database
 from typing import List
 
 router = APIRouter()
@@ -35,9 +35,28 @@ def update_status(reference_id: str, status_update: schemas.ComplaintUpdateStatu
     db.commit()
     db.refresh(complaint)
     
-    # Mock SMS
+    # Real SMS
     if complaint.phone_number:
-        print(f"[SMS MOCK] To: {complaint.phone_number} | Msg: Your complaint {complaint.reference_id} status is now {complaint.status}")
+        try:
+            import os
+            from twilio.rest import Client
+            
+            account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
+            auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+            from_number = os.environ.get("TWILIO_PHONE_NUMBER")
+            
+            if account_sid and auth_token and from_number:
+                client = Client(account_sid, auth_token)
+                message = client.messages.create(
+                    body=f"OmbudsPortal: Your complaint {complaint.reference_id} status is now {complaint.status.replace('_', ' ').upper()}.",
+                    from_=from_number,
+                    to=complaint.phone_number
+                )
+                print(f"[SMS SENT] SID: {message.sid}")
+            else:
+                print("[SMS ERROR] Missing Twilio credentials")
+        except Exception as e:
+            print(f"[SMS FAILED] {str(e)}")
         
     return complaint
 

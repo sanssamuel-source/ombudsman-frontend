@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from .database import Base
+from database import Base
 import uuid
 
 def generate_reference_id():
@@ -13,6 +13,7 @@ class Complaint(Base):
     id = Column(Integer, primary_key=True, index=True)
     reference_id = Column(String, unique=True, index=True, default=generate_reference_id)
     ministry = Column(String, index=True)
+    location = Column(String, index=True, default="Unspecified") # New Field
     official_name = Column(String)
     details = Column(Text)
     phone_number = Column(String, nullable=True)
