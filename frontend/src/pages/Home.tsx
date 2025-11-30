@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
-import { Shield, FileText, Search } from 'lucide-react';
+import { FileText, Search } from 'lucide-react';
+
+import { LOGO_BASE64 } from '../assets/LogoBase64';
 
 const Home = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white p-4">
             <div className="max-w-4xl w-full text-center space-y-8">
                 <div className="flex justify-center mb-6">
-                    <Shield className="w-20 h-20 text-sky-500" />
+                    <img src={LOGO_BASE64} alt="Ombudsman Logo" className="w-32 h-32 object-contain drop-shadow-lg" />
                 </div>
                 <h1 className="text-5xl font-bold tracking-tight">
                     Ombudsman <span className="text-sky-500">Digital Portal</span>

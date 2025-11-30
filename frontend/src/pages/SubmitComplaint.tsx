@@ -7,6 +7,7 @@ const SubmitComplaint = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         ministry: '',
+        location: '',
         official_name: '',
         details: '',
         phone_number: ''
@@ -18,8 +19,6 @@ const SubmitComplaint = () => {
         setLoading(true);
         try {
             const response = await axios.post('/api/public/complaint', formData);
-            // In a real app, we'd show a success modal or redirect to a success page
-            // For MVP, we'll alert and redirect to track
             alert(`Complaint Submitted! Your Reference ID is: ${response.data.reference_id}`);
             navigate('/');
         } catch (error) {
@@ -44,16 +43,47 @@ const SubmitComplaint = () => {
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-2">Ministry / Department</label>
-                            <input
-                                type="text"
-                                required
-                                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all"
-                                placeholder="e.g. Ministry of Transport"
-                                value={formData.ministry}
-                                onChange={e => setFormData({ ...formData, ministry: e.target.value })}
-                            />
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label className="block text-sm font-medium text-slate-700 mb-2">Government Ministry</label>
+                                <select
+                                    required
+                                    className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition-all"
+                                    value={formData.ministry}
+                                    onChange={(e) => setFormData({ ...formData, ministry: e.target.value })}
+                                >
+                                    <option value="">Select Ministry...</option>
+                                    <option value="Education">Ministry of Education</option>
+                                    <option value="Health">Ministry of Health</option>
+                                    <option value="Transport">Ministry of Transport</option>
+                                    <option value="Police">Police Force</option>
+                                    <option value="Energy">Ministry of Energy</option>
+                                    <option value="Lands">Ministry of Lands</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-slate-700 mb-2">District / Location</label>
+                                <select
+                                    required
+                                    className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition-all"
+                                    value={formData.location}
+                                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                                >
+                                    <option value="">Select District...</option>
+                                    <option value="Freetown">Freetown (Western Area)</option>
+                                    <option value="Bo">Bo District</option>
+                                    <option value="Kenema">Kenema District</option>
+                                    <option value="Makeni">Makeni (Bombali)</option>
+                                    <option value="Kono">Kono District</option>
+                                    <option value="Port Loko">Port Loko District</option>
+                                    <option value="Kailahun">Kailahun District</option>
+                                    <option value="Moyamba">Moyamba District</option>
+                                    <option value="Pujehun">Pujehun District</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div>

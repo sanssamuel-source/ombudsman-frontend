@@ -4,6 +4,7 @@ from datetime import datetime
 
 class ComplaintBase(BaseModel):
     ministry: str
+    location: str # New Field
     official_name: str
     details: str
     phone_number: Optional[str] = None
