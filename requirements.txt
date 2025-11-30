@@ -1,4 +1,3 @@
-# CACHE_BUSTER_12345
 fastapi
 uvicorn
 sqlalchemy
