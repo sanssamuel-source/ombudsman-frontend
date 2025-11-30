@@ -25,9 +25,10 @@ const SubmitComplaint = () => {
             // For MVP, we'll alert and redirect to track
             alert(`Complaint Submitted! Your Reference ID is: ${response.data.reference_id}`);
             navigate('/');
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error submitting complaint:', error);
-            alert('Failed to submit complaint. Please try again.');
+            const errorMessage = error.response?.data?.detail || error.message || 'Unknown error';
+            alert(`Failed to submit complaint. Error: ${errorMessage}. Please check your connection and try again.`);
         } finally {
             setLoading(false);
         }
@@ -68,11 +69,15 @@ const SubmitComplaint = () => {
                                 onChange={e => setFormData({ ...formData, location: e.target.value })}
                             >
                                 <option value="">Select Location</option>
-                                <option value="Abuja">Abuja</option>
-                                <option value="Lagos">Lagos</option>
-                                <option value="Kano">Kano</option>
-                                <option value="Port Harcourt">Port Harcourt</option>
-                                <option value="Enugu">Enugu</option>
+                                <option value="Freetown">Freetown</option>
+                                <option value="Bo">Bo</option>
+                                <option value="Kenema">Kenema</option>
+                                <option value="Makeni">Makeni</option>
+                                <option value="Koidu">Koidu</option>
+                                <option value="Port Loko">Port Loko</option>
+                                <option value="Waterloo">Waterloo</option>
+                                <option value="Kabala">Kabala</option>
+                                <option value="Moyamba">Moyamba</option>
                                 <option value="Other">Other</option>
                             </select>
                         </div>
@@ -86,13 +91,13 @@ const SubmitComplaint = () => {
                                 onChange={e => setFormData({ ...formData, ministry: e.target.value })}
                             >
                                 <option value="">Select a Ministry</option>
-                                <option value="Ministry of Transport">Ministry of Transport</option>
-                                <option value="Ministry of Education">Ministry of Education</option>
-                                <option value="Ministry of Health">Ministry of Health</option>
+                                <option value="Ministry of Transport and Aviation">Ministry of Transport and Aviation</option>
+                                <option value="Ministry of Basic and Senior Secondary Education">Ministry of Basic and Senior Secondary Education</option>
+                                <option value="Ministry of Health and Sanitation">Ministry of Health and Sanitation</option>
                                 <option value="Ministry of Finance">Ministry of Finance</option>
-                                <option value="Ministry of Works">Ministry of Works</option>
-                                <option value="Police Department">Police Department</option>
-                                <option value="Immigration Office">Immigration Office</option>
+                                <option value="Ministry of Works and Public Assets">Ministry of Works and Public Assets</option>
+                                <option value="Sierra Leone Police">Sierra Leone Police</option>
+                                <option value="Immigration Department">Immigration Department</option>
                                 <option value="Other">Other</option>
                             </select>
                         </div>
@@ -145,7 +150,7 @@ const SubmitComplaint = () => {
                             <input
                                 type="tel"
                                 className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all"
-                                placeholder="+1234567890"
+                                placeholder="+232..."
                                 value={formData.phone_number}
                                 onChange={e => setFormData({ ...formData, phone_number: e.target.value })}
                             />
