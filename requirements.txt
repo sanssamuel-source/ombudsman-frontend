@@ -1,5 +1,4 @@
-# Force Cache Invalidation
-fastapi
+﻿fastapi
 uvicorn
 sqlalchemy
 pydantic
