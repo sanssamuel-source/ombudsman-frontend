@@ -118,82 +118,80 @@ const AdminDashboard = () => {
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
-                </div>
+                        {/* Complaints List */}
+                        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                            <div className="p-6 border-b border-slate-200 flex justify-between items-center">
+                                <h2 className="text-lg font-bold text-slate-800">Recent Complaints</h2>
+                                <div className="flex items-center space-x-2">
+                                    <Filter className="w-4 h-4 text-slate-500" />
+                                    <select
+                                        className="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1 text-sm outline-none focus:ring-2 focus:ring-sky-500/20"
+                                        value={filter}
+                                        onChange={e => setFilter(e.target.value)}
+                                    >
+                                        <option value="all">All Status</option>
+                                        <option value="submitted">Submitted</option>
+                                        <option value="in_review">In Review</option>
+                                        <option value="resolved">Resolved</option>
+                                        <option value="rejected">Rejected</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                {/* Complaints List */}
-                <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div className="p-6 border-b border-slate-200 flex justify-between items-center">
-                        <h2 className="text-lg font-bold text-slate-800">Recent Complaints</h2>
-                        <div className="flex items-center space-x-2">
-                            <Filter className="w-4 h-4 text-slate-500" />
-                            <select
-                                className="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1 text-sm outline-none focus:ring-2 focus:ring-sky-500/20"
-                                value={filter}
-                                onChange={e => setFilter(e.target.value)}
-                            >
-                                <option value="all">All Status</option>
-                                <option value="submitted">Submitted</option>
-                                <option value="in_review">In Review</option>
-                                <option value="resolved">Resolved</option>
-                                <option value="rejected">Rejected</option>
-                            </select>
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left">
+                                    <thead className="bg-slate-50 text-slate-500 text-xs uppercase font-medium">
+                                        <tr>
+                                            <th className="px-6 py-4">Ref ID</th>
+                                            <th className="px-6 py-4">Ministry</th>
+                                            <th className="px-6 py-4">Date</th>
+                                            <th className="px-6 py-4">Status</th>
+                                            <th className="px-6 py-4">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-slate-100">
+                                        {filteredComplaints.map((complaint) => (
+                                            <tr key={complaint.reference_id} className="hover:bg-slate-50 transition-colors">
+                                                <td className="px-6 py-4 font-mono text-sm font-medium text-slate-900">{complaint.reference_id}</td>
+                                                <td className="px-6 py-4 text-slate-600">{complaint.ministry}</td>
+                                                <td className="px-6 py-4 text-slate-500 text-sm">{new Date(complaint.created_at).toLocaleDateString()}</td>
+                                                <td className="px-6 py-4">
+                                                    <span className={`px-2 py-1 rounded-full text-xs font-semibold capitalize
+                        ${complaint.status === 'submitted' ? 'bg-blue-100 text-blue-700' :
+                                                            complaint.status === 'in_review' ? 'bg-amber-100 text-amber-700' :
+                                                                complaint.status === 'resolved' ? 'bg-emerald-100 text-emerald-700' :
+                                                                    'bg-red-100 text-red-700'}`}>
+                                                        {complaint.status.replace('_', ' ')}
+                                                    </span>
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    <select
+                                                        className="bg-white border border-slate-200 rounded px-2 py-1 text-sm outline-none focus:border-sky-500"
+                                                        value={complaint.status}
+                                                        onChange={(e) => updateStatus(complaint.reference_id, e.target.value)}
+                                                    >
+                                                        <option value="submitted">Submitted</option>
+                                                        <option value="in_review">In Review</option>
+                                                        <option value="resolved">Resolved</option>
+                                                        <option value="rejected">Rejected</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                        {filteredComplaints.length === 0 && (
+                                            <tr>
+                                                <td colSpan={5} className="px-6 py-8 text-center text-slate-400">
+                                                    No complaints found.
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-left">
-                            <thead className="bg-slate-50 text-slate-500 text-xs uppercase font-medium">
-                                <tr>
-                                    <th className="px-6 py-4">Ref ID</th>
-                                    <th className="px-6 py-4">Ministry</th>
-                                    <th className="px-6 py-4">Date</th>
-                                    <th className="px-6 py-4">Status</th>
-                                    <th className="px-6 py-4">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-slate-100">
-                                {filteredComplaints.map((complaint) => (
-                                    <tr key={complaint.reference_id} className="hover:bg-slate-50 transition-colors">
-                                        <td className="px-6 py-4 font-mono text-sm font-medium text-slate-900">{complaint.reference_id}</td>
-                                        <td className="px-6 py-4 text-slate-600">{complaint.ministry}</td>
-                                        <td className="px-6 py-4 text-slate-500 text-sm">{new Date(complaint.created_at).toLocaleDateString()}</td>
-                                        <td className="px-6 py-4">
-                                            <span className={`px-2 py-1 rounded-full text-xs font-semibold capitalize
-                        ${complaint.status === 'submitted' ? 'bg-blue-100 text-blue-700' :
-                                                    complaint.status === 'in_review' ? 'bg-amber-100 text-amber-700' :
-                                                        complaint.status === 'resolved' ? 'bg-emerald-100 text-emerald-700' :
-                                                            'bg-red-100 text-red-700'}`}>
-                                                {complaint.status.replace('_', ' ')}
-                                            </span>
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <select
-                                                className="bg-white border border-slate-200 rounded px-2 py-1 text-sm outline-none focus:border-sky-500"
-                                                value={complaint.status}
-                                                onChange={(e) => updateStatus(complaint.reference_id, e.target.value)}
-                                            >
-                                                <option value="submitted">Submitted</option>
-                                                <option value="in_review">In Review</option>
-                                                <option value="resolved">Resolved</option>
-                                                <option value="rejected">Rejected</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                ))}
-                                {filteredComplaints.length === 0 && (
-                                    <tr>
-                                        <td colSpan={5} className="px-6 py-8 text-center text-slate-400">
-                                            No complaints found.
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-            </div>
-        </div>
-    );
+                );
 };
 
-export default AdminDashboard;
+                export default AdminDashboard;
