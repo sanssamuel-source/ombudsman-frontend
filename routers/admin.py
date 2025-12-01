@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Header
 from sqlalchemy.orm import Session
-import models, schemas, database
+from .. import models, schemas, database
 from typing import List
 
 router = APIRouter()
@@ -14,31 +14,31 @@ def verify_admin(x_admin_token: str = Header(...)):
     db.commit()
     db.refresh(complaint)
     
-    # SMS Notification (Disabled for Build Stability)
-    # if complaint.phone_number:
-    #     try:
-    #         # Try Real SMS if Env Vars exist
-    #         import os
-    #         from twilio.rest import Client
-    #         
-    #         account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
-    #         auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
-    #         from_number = os.environ.get("TWILIO_PHONE_NUMBER")
-    #         
-    #         if account_sid and auth_token and from_number:
-    #             client = Client(account_sid, auth_token)
-    #             message = client.messages.create(
-    #                 body=f"OmbudsPortal: Your complaint {complaint.reference_id} status is now {complaint.status.replace('_', ' ').upper()}.",
-    #                 from_=from_number,
-    #                 to=complaint.phone_number
-    #             )
-    #             print(f"[SMS SENT] SID: {message.sid}")
-    #         else:
-    #             raise Exception("Twilio credentials not found")
-    #     except Exception as e:
-    #         # Fallback to Mock
-    #         print(f"[SMS MOCK] To: {complaint.phone_number} | Msg: Your complaint {complaint.reference_id} status is now {complaint.status}")
-    #         print(f"[SMS LOG] Error sending real SMS: {str(e)}")
+    # SMS Notification
+    if complaint.phone_number:
+        try:
+            # Try Real SMS if Env Vars exist
+            import os
+            from twilio.rest import Client
+            
+            account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
+            auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+            from_number = os.environ.get("TWILIO_PHONE_NUMBER")
+            
+            if account_sid and auth_token and from_number:
+                client = Client(account_sid, auth_token)
+                message = client.messages.create(
+                    body=f"OmbudsPortal: Your complaint {complaint.reference_id} status is now {complaint.status.replace('_', ' ').upper()}.",
+                    from_=from_number,
+                    to=complaint.phone_number
+                )
+                print(f"[SMS SENT] SID: {message.sid}")
+            else:
+                raise Exception("Twilio credentials not found")
+        except Exception as e:
+            # Fallback to Mock
+            print(f"[SMS MOCK] To: {complaint.phone_number} | Msg: Your complaint {complaint.reference_id} status is now {complaint.status}")
+            print(f"[SMS LOG] Error sending real SMS: {str(e)}")
             
     return complaint
 
