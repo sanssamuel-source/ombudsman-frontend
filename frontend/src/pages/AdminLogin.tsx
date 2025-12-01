@@ -4,15 +4,26 @@ import { Lock } from 'lucide-react';
 
 const AdminLogin = () => {
     const navigate = useNavigate();
-    const [token, setToken] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        // In a real app, we'd verify with backend, but for MVP we just store it
-        // The backend will reject invalid tokens anyway
-        if (token) {
-            localStorage.setItem('admin_token', token);
-            navigate('/admin/dashboard');
+        try {
+            const response = await fetch('/api/admin/login?username=' + username + '&password=' + password, {
+                method: 'POST'
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('admin_token', data.token);
+                navigate('/admin/dashboard');
+            } else {
+                alert('Invalid credentials');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            alert('Login failed');
         }
     };
 
@@ -30,12 +41,22 @@ const AdminLogin = () => {
                 <form onSubmit={handleLogin} className="space-y-6">
                     <div>
                         <input
+                            type="text"
+                            required
+                            className="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all"
+                            placeholder="Username"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <input
                             type="password"
                             required
                             className="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all"
-                            placeholder="Admin Token"
-                            value={token}
-                            onChange={e => setToken(e.target.value)}
+                            placeholder="Password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
                         />
                     </div>
                     <button
