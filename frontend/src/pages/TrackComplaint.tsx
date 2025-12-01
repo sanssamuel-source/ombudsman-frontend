@@ -20,8 +20,9 @@ const TrackComplaint = () => {
             const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
             const response = await axios.get(`${backendUrl}/public/complaint/${refId}`);
             setComplaint(response.data);
-        } catch (err) {
-            setError('Complaint not found. Please check your Reference ID.');
+        } catch (err: any) {
+            const errorMessage = err.response?.data?.detail || err.message || 'Unknown error';
+            setError(`Error: ${errorMessage}. Please check your Reference ID or connection.`);
         } finally {
             setLoading(false);
         }

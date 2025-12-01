@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+print("🚀 STARTING OMBUDSMAN PORTAL API...")
+
 from fastapi.middleware.cors import CORSMiddleware
 import models, database
 from routers import public, admin, sms, ussd

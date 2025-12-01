@@ -39,9 +39,10 @@ const SubmitComplaint = () => {
             const response = await axios.post(`${backendUrl}/public/complaint`, formData);
             alert(`Complaint Submitted! Your Reference ID is: ${response.data.reference_id}`);
             navigate('/');
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error submitting complaint:', error);
-            alert('Failed to submit complaint. Please try again.');
+            const errorMessage = error.response?.data?.detail || error.message || 'Unknown error';
+            alert(`Failed to submit complaint. Error: ${errorMessage}. \n\nPlease ensure the Backend URL is configured correctly.`);
         } finally {
             setLoading(false);
         }

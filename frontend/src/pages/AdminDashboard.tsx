@@ -39,11 +39,14 @@ const AdminDashboard = () => {
             ]);
             setComplaints(complaintsRes.data);
             setAnalytics(analyticsRes.data);
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error fetching data:', error);
             if (axios.isAxiosError(error) && error.response?.status === 401) {
                 localStorage.removeItem('admin_token');
                 navigate('/admin');
+            } else {
+                const errorMessage = error.response?.data?.detail || error.message || 'Unknown error';
+                alert(`Failed to load dashboard data. Error: ${errorMessage}. \n\nPlease check your connection or backend status.`);
             }
         } finally {
             setLoading(false);
