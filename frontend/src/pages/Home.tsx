@@ -8,13 +8,9 @@ const Home = () => {
         {/* Logo and Header */}
         <div className="flex justify-center mb-6">
           <img 
-            src="https://www.ombudsman.gov.sl/images/logo.png" 
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9Ijk1IiBmaWxsPSIjMDA4YTU5IiBzdHJva2U9IiMxNDJmMzMiIHN0cm9rZS13aWR0aD0iNSIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iNzUiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTEwMCA0NUw4MCA3NUgxMjBaIiBmaWxsPSIjMDA4YTU5Ii8+PHJlY3QgeD0iNzAiIHk9Ijc1IiB3aWR0aD0iNjAiIGhlaWdodD0iNDAiIGZpbGw9IiMxNDJmMzMiLz48cGF0aCBkPSJNNzAgOTBIMTMwIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMyIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEzNSIgcj0iOCIgZmlsbD0iIzAwOGE1OSIvPjx0ZXh0IHg9IjUwJSIgeT0iMTcwIiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMxNDJmMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSJib2xkIj5PTUJVRFNNQU48L3RleHQ+PC9zdmc+"
             alt="Sierra Leone Ombudsman Logo" 
             className="w-40 h-40 object-contain drop-shadow-2xl" 
-            onError={(e) => {
-              // Fallback to local logo if external fails
-              e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzBjNGE2ZSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjQwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk88L3RleHQ+PC9zdmc+';
-            }}
           />
         </div>
         
