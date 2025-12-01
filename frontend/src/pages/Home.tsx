@@ -1,18 +1,22 @@
 import { Link } from 'react-router-dom';
-import { Shield, FileText, Search } from 'lucide-react';
+import { FileText, Search } from 'lucide-react';
 
 const Home = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white p-4">
             <div className="max-w-4xl w-full text-center space-y-8">
                 <div className="flex justify-center mb-6">
-                    <Shield className="w-20 h-20 text-sky-500" />
+                    <img 
+                        src="/assets/ombudsman-logo.png" 
+                        alt="Office of the Ombudsman Sierra Leone" 
+                        className="h-24 object-contain"
+                    />
                 </div>
                 <h1 className="text-5xl font-bold tracking-tight">
                     Ombudsman <span className="text-sky-500">Digital Portal</span>
                 </h1>
                 <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-                    A secure, transparent platform for citizens to report public service issues and track their resolution.
+                    A secure, transparent digital platform for citizens to report public service issues and track their resolution.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-6 mt-12">

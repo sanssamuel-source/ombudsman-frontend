@@ -5,7 +5,7 @@ import './index.css'
 import axios from 'axios'
 
 // Set Axios Base URL
-axios.defaults.baseURL = 'https://ombudsman-frontend-production-6c5b.up.railway.app';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || '';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
