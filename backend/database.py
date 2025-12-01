@@ -1,10 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import os
+import tempfile
 
-# Always use /tmp for database to ensure write permissions on Vercel/Railway
-SQLALCHEMY_DATABASE_URL = "sqlite:////tmp/ombudsman.db"
+# Use system temp directory for database (works on Windows & Linux)
+tmp_dir = tempfile.gettempdir()
+db_path = os.path.join(tmp_dir, "ombudsman.db")
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{db_path}"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
