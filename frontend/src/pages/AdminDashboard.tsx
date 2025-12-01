@@ -41,9 +41,9 @@ const AdminDashboard = () => {
         }
     };
 
-    const updateStatus = async (complaintId: number, newStatus: string) => {
+    const updateStatus = async (refId: string, newStatus: string) => {
         try {
-            await axios.patch(`/api/admin/complaint/${complaintId}/status`,
+            await axios.patch(`/api/admin/complaint/${refId}/status`,
                 { status: newStatus },
                 { headers: { 'x-admin-token': token } }
             );
@@ -188,7 +188,7 @@ const AdminDashboard = () => {
                                             <select
                                                 className="bg-white border border-slate-200 rounded px-2 py-1 text-sm outline-none focus:border-sky-500"
                                                 value={complaint.status}
-                                                onChange={(e) => updateStatus(complaint.id, e.target.value)}
+                                                onChange={(e) => updateStatus(complaint.reference_id, e.target.value)}
                                             >
                                                 <option value="submitted">Submitted</option>
                                                 <option value="in_review">In Review</option>

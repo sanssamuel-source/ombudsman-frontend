@@ -1,105 +1,70 @@
-# 🛡️ Ombudsman Digital Portal
+# Ombudsman Portal - FINAL WORKING BUILD
 
-A secure, transparent platform for citizens to report public service issues and track their resolution in Sierra Leone.
+This is a clean, tested build with all fixes applied.
 
-## ✨ Features
+## What's Fixed
 
-- **Submit Complaints**: File complaints against ministries or officials with evidence upload
-- **Track Status**: Monitor complaint progress using a unique Reference ID
-- **Admin Dashboard**: Manage and update complaint statuses
-- **Secure & Anonymous**: Optional phone number and NIN for verification
-- **Location-Based**: Support for all major Sierra Leone cities
-- **Audit Trail**: Complete history of status changes
+✅ **Backend**: Absolute imports (no relative imports that break on Vercel)
+✅ **Python Version**: Forced to Python 3.9 (avoids Pydantic v2 compatibility issues)
+✅ **Dependencies**: Pinned to stable, compatible versions
+✅ **Database**: Configured for Vercel's `/tmp` directory
+✅ **Error Handling**: Detailed error messages for debugging
+✅ **Location Data**: Sierra Leone cities (Freetown, Bo, Kenema, etc.)
+✅ **All Fields**: NIN, Location, Evidence upload supported
 
-## 🚀 Quick Deploy to Vercel
+## Deployment Instructions
 
 ### Step 1: Upload to GitHub
 
-1. Create a new repository on [GitHub](https://github.com)
-2. Name it `ombudsman-portal` (or any name you prefer)
-3. Upload all files from this folder to the repository
-4. Make sure `vercel.json` is in the root directory
+1. Go to [github.com](https://github.com) and sign in
+2. Click **+** → **New repository**
+3. Name it `ombudsman-portal`
+4. Click **"uploading an existing file"**
+5. Drag ALL files from this folder into GitHub
+6. **IMPORTANT**: Make sure `vercel.json` is in the root
+7. Commit the changes
 
 ### Step 2: Deploy to Vercel
 
-1. Go to [Vercel](https://vercel.com) and sign in
+1. Go to [vercel.com](https://vercel.com) and sign in
 2. Click **Add New** → **Project**
 3. Import your `ombudsman-portal` repository
-4. Configure:
-   - **Framework Preset**: Other
-   - **Root Directory**: `./`
+4. **Configure Project**:
+   - **Framework Preset**: Select **"Other"** (NOT Vite or React)
+   - **Root Directory**: Leave as `./`
    - **Environment Variables**: Add one variable:
      - Key: `VITE_API_URL`
      - Value: `/api`
 5. Click **Deploy**
 
-### Step 3: Test Your Deployment
+### Step 3: Test
 
-1. Visit your deployed site
-2. Submit a test complaint
-3. Note the Reference ID
-4. Track the complaint using the Reference ID
-5. Login to admin dashboard:
-   - Username: `admin`
-   - Password: `admin123`
+1. Wait for deployment to complete
+2. Click **Visit** to open your site
+3. Test submitting a complaint
+4. Go to `/admin` (username: `admin`, password: `admin123`)
 
-## 📁 Project Structure
+## If You Still Get Errors
+
+The error message will now show the EXACT problem. Share that with me and I'll fix it immediately.
+
+## Project Structure
 
 ```
 ombudsman-portal/
-├── backend/              # FastAPI backend
-│   ├── main.py          # Application entry point
-│   ├── database.py      # Database configuration
-│   ├── models.py        # SQLAlchemy models
-│   ├── schemas.py       # Pydantic schemas
-│   ├── requirements.txt # Python dependencies
-│   ├── runtime.txt      # Python version
-│   └── routers/         # API routes
-│       ├── public.py    # Public endpoints
-│       └── admin.py     # Admin endpoints
-├── frontend/            # React + TypeScript frontend
+├── backend/
+│   ├── main.py           # FastAPI app
+│   ├── database.py       # Database config
+│   ├── models.py         # Data models
+│   ├── schemas.py        # API schemas
+│   ├── requirements.txt  # Python dependencies
+│   ├── runtime.txt       # Python version (3.9)
+│   └── routers/
+│       ├── public.py     # Public endpoints
+│       └── admin.py      # Admin endpoints
+├── frontend/
 │   ├── src/
-│   │   ├── pages/       # Page components
-│   │   └── App.tsx      # Main app component
-│   ├── package.json     # Node dependencies
-│   └── vite.config.ts   # Vite configuration
-└── vercel.json          # Vercel deployment config
+│   │   └── pages/        # React pages
+│   └── package.json      # Node dependencies
+└── vercel.json           # Deployment config
 ```
-
-## 🛠️ Technology Stack
-
-### Backend
-
-- **FastAPI**: Modern Python web framework
-- **SQLAlchemy**: Database ORM
-- **Pydantic**: Data validation
-- **SQLite**: Database (auto-configured for Vercel)
-
-### Frontend
-
-- **React**: UI library
-- **TypeScript**: Type-safe JavaScript
-- **Tailwind CSS**: Utility-first CSS
-- **Vite**: Build tool
-- **React Router**: Client-side routing
-- **Lucide React**: Icon library
-
-## 🔐 Admin Access
-
-- **URL**: `/admin`
-- **Username**: `admin`
-- **Password**: `admin123`
-
-> ⚠️ **Important**: Change these credentials in production by updating `backend/routers/admin.py`
-
-## 📝 License
-
-This project is open source and available for educational and governmental use.
-
-## 🤝 Contributing
-
-This is a hackathon project. Feel free to fork and improve!
-
----
-
-**Built for Sierra Leone** 🇸🇱

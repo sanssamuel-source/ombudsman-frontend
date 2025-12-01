@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional
 from datetime import datetime
 
 class ComplaintBase(BaseModel):
@@ -7,6 +7,9 @@ class ComplaintBase(BaseModel):
     official_name: str
     details: str
     phone_number: Optional[str] = None
+    nin: Optional[str] = None
+    location: Optional[str] = None
+    evidence: Optional[str] = None
 
 class ComplaintCreate(ComplaintBase):
     pass
@@ -17,7 +20,7 @@ class ComplaintResponse(ComplaintBase):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ComplaintUpdateStatus(BaseModel):
     status: str
@@ -29,4 +32,4 @@ class AuditLogResponse(BaseModel):
     timestamp: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True

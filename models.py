@@ -16,7 +16,10 @@ class Complaint(Base):
     official_name = Column(String)
     details = Column(Text)
     phone_number = Column(String, nullable=True)
-    status = Column(String, default="submitted") # submitted, in_review, resolved, rejected
+    nin = Column(String, nullable=True)
+    location = Column(String, nullable=True)
+    evidence = Column(Text, nullable=True)
+    status = Column(String, default="submitted")
     created_at = Column(DateTime, default=datetime.utcnow)
 
     audit_logs = relationship("AuditLog", back_populates="complaint")
@@ -28,7 +31,7 @@ class AuditLog(Base):
     complaint_id = Column(Integer, ForeignKey("complaints.id"))
     previous_status = Column(String)
     new_status = Column(String)
-    changed_by = Column(String) # "admin" or "system"
+    changed_by = Column(String)
     timestamp = Column(DateTime, default=datetime.utcnow)
 
     complaint = relationship("Complaint", back_populates="audit_logs")
