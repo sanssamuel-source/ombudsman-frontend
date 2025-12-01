@@ -8,29 +8,7 @@
 
 **Admin Access:** Token: `P@s5w0rd@2026`
 
---- Track complaint status in real-time
-- Receive automated updates
-- Enable the Ombudsman's office to analyze patterns and identify corruption hotspots
-
-### Features
-
-- 🚀 Beautiful, modern UI with dark mode
-- 📱 Mobile-responsive design
-- 🤖 AI-powered sentiment analysis
-- 🔗 Blockchain-style immutability hashing
-- 📊 Admin dashboard with data visualization
-- 🗺️ GPS location tracking
-- 📎 Evidence file uploads
-- 🔍 Real-time complaint tracking
-
-### Technology Stack
-
-- **Frontend:** React + Vite + TailwindCSS
-- **Backend:** Node.js + Express + Prisma
-- **Database:** SQLite (portable, zero-config)
-- **AI:** Natural language processing for sentiment analysis
-- **Blockchain:** SHA-256 cryptographic hashing
-
+---
 
 ## 🏗️ Architecture
 
@@ -577,4 +555,3 @@ Built for the **Big 5 AI and Blockchain Hackathon 2025**
 ## 📧 Contact
 
 For technical questions or support, please reach out to the development team.
-
