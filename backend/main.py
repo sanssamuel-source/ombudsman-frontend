@@ -11,7 +11,7 @@ app = FastAPI(title="Ombudsman Digital Complaint Portal")
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Allow all for hackathon
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

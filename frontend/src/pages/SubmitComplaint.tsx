@@ -9,7 +9,10 @@ const SubmitComplaint = () => {
         ministry: '',
         official_name: '',
         details: '',
-        phone_number: ''
+        phone_number: '',
+        nin: '',
+        location: '',
+        evidence: ''
     });
     const [loading, setLoading] = useState(false);
 
@@ -22,9 +25,10 @@ const SubmitComplaint = () => {
             // For MVP, we'll alert and redirect to track
             alert(`Complaint Submitted! Your Reference ID is: ${response.data.reference_id}`);
             navigate('/');
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error submitting complaint:', error);
-            alert('Failed to submit complaint. Please try again.');
+            const errorMessage = error.response?.data?.detail || error.message || 'Unknown error';
+            alert(`Failed to submit complaint. Error: ${errorMessage}. Please check your connection and try again.`);
         } finally {
             setLoading(false);
         }
@@ -45,15 +49,57 @@ const SubmitComplaint = () => {
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-2">Ministry / Department</label>
+                            <label className="block text-sm font-medium text-slate-700 mb-2">National Identification Number (NIN)</label>
                             <input
                                 type="text"
                                 required
                                 className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all"
-                                placeholder="e.g. Ministry of Transport"
+                                placeholder="Enter your NIN"
+                                value={formData.nin}
+                                onChange={e => setFormData({ ...formData, nin: e.target.value })}
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-2">Location</label>
+                            <select
+                                required
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all bg-white"
+                                value={formData.location}
+                                onChange={e => setFormData({ ...formData, location: e.target.value })}
+                            >
+                                <option value="">Select Location</option>
+                                <option value="Freetown">Freetown</option>
+                                <option value="Bo">Bo</option>
+                                <option value="Kenema">Kenema</option>
+                                <option value="Makeni">Makeni</option>
+                                <option value="Koidu">Koidu</option>
+                                <option value="Port Loko">Port Loko</option>
+                                <option value="Waterloo">Waterloo</option>
+                                <option value="Kabala">Kabala</option>
+                                <option value="Moyamba">Moyamba</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-2">Ministry / Department</label>
+                            <select
+                                required
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all bg-white"
                                 value={formData.ministry}
                                 onChange={e => setFormData({ ...formData, ministry: e.target.value })}
-                            />
+                            >
+                                <option value="">Select a Ministry</option>
+                                <option value="Ministry of Transport and Aviation">Ministry of Transport and Aviation</option>
+                                <option value="Ministry of Basic and Senior Secondary Education">Ministry of Basic and Senior Secondary Education</option>
+                                <option value="Ministry of Health and Sanitation">Ministry of Health and Sanitation</option>
+                                <option value="Ministry of Finance">Ministry of Finance</option>
+                                <option value="Ministry of Works and Public Assets">Ministry of Works and Public Assets</option>
+                                <option value="Sierra Leone Police">Sierra Leone Police</option>
+                                <option value="Immigration Department">Immigration Department</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
 
                         <div>
@@ -80,11 +126,31 @@ const SubmitComplaint = () => {
                         </div>
 
                         <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-2">Photo Evidence (Optional)</label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all"
+                                onChange={e => {
+                                    const file = e.target.files?.[0];
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        reader.onloadend = () => {
+                                            setFormData({ ...formData, evidence: reader.result as string });
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                }}
+                            />
+                            <p className="text-xs text-slate-500 mt-1">Upload an image (JPG, PNG) if you have evidence.</p>
+                        </div>
+
+                        <div>
                             <label className="block text-sm font-medium text-slate-700 mb-2">Phone Number (for SMS updates)</label>
                             <input
                                 type="tel"
                                 className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition-all"
-                                placeholder="+1234567890"
+                                placeholder="+232..."
                                 value={formData.phone_number}
                                 onChange={e => setFormData({ ...formData, phone_number: e.target.value })}
                             />

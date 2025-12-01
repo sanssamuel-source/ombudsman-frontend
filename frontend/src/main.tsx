@@ -2,11 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-
 import axios from 'axios'
 
-// Set Axios Base URL to the working Railway Backend
-axios.defaults.baseURL = 'https://ombudsman-frontend-production-6c5b.up.railway.app';
+// Set Axios Base URL
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || '';
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>

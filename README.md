@@ -1,74 +1,105 @@
-# 🇸🇱 Ombudsman Digital Complaint Portal
+# 🛡️ Ombudsman Digital Portal
 
-**A secure, transparent platform for citizens of Sierra Leone to report public service issues and track their resolution.**
+A secure, transparent platform for citizens to report public service issues and track their resolution in Sierra Leone.
 
-> **Big 5 AI and Blockchain Hackathon Submission** > **Category:** Ombudsman Complaint Portal
+## ✨ Features
 
-![Ombudsman Portal Logo](frontend/src/assets/logo.png)
+- **Submit Complaints**: File complaints against ministries or officials with evidence upload
+- **Track Status**: Monitor complaint progress using a unique Reference ID
+- **Admin Dashboard**: Manage and update complaint statuses
+- **Secure & Anonymous**: Optional phone number and NIN for verification
+- **Location-Based**: Support for all major Sierra Leone cities
+- **Audit Trail**: Complete history of status changes
 
-## 📖 Project Overview
+## 🚀 Quick Deploy to Vercel
 
-The Ombudsman Digital Complaint Portal is a modern web application designed to bridge the gap between citizens and the Office of the Ombudsman. It allows for:
+### Step 1: Upload to GitHub
 
-1.  **Secure Complaint Submission**: Citizens can easily file complaints against Ministries, Departments, and Agencies (MDAs).
-2.  **Real-time Tracking**: Users receive a unique Reference ID to track their case status.
-3.  **SMS Notifications**: Automated updates via Twilio keep citizens informed.
-4.  **Admin Dashboard**: A powerful interface for the Ombudsman's office to manage, review, and resolve cases.
-5.  **Data Analytics**: Visual insights into complaint trends and hotspots.
+1. Create a new repository on [GitHub](https://github.com)
+2. Name it `ombudsman-portal` (or any name you prefer)
+3. Upload all files from this folder to the repository
+4. Make sure `vercel.json` is in the root directory
 
-## ✨ Key Features
+### Step 2: Deploy to Vercel
 
-- **User-Friendly Interface**: Built with React and Tailwind CSS for accessibility and speed.
-- **Anonymous Reporting**: Option to submit complaints without fear of reprisal.
-- **Export to Excel**: Admins can export case data for official reporting.
-- **Mobile Responsive**: Fully functional on smartphones and tablets.
-- **Robust Backend**: Powered by FastAPI (Python) for high performance.
+1. Go to [Vercel](https://vercel.com) and sign in
+2. Click **Add New** → **Project**
+3. Import your `ombudsman-portal` repository
+4. Configure:
+   - **Framework Preset**: Other
+   - **Root Directory**: `./`
+   - **Environment Variables**: Add one variable:
+     - Key: `VITE_API_URL`
+     - Value: `/api`
+5. Click **Deploy**
 
-## 🛠️ Tech Stack
+### Step 3: Test Your Deployment
 
-- **Frontend**: React, TypeScript, Vite, Tailwind CSS, Lucide Icons
-- **Backend**: Python, FastAPI, SQLAlchemy, Pydantic
-- **Database**: SQLite (Dev) / PostgreSQL (Prod ready)
-- **Services**: Twilio (SMS), Railway (Hosting), Vercel (Frontend Hosting)
+1. Visit your deployed site
+2. Submit a test complaint
+3. Note the Reference ID
+4. Track the complaint using the Reference ID
+5. Login to admin dashboard:
+   - Username: `admin`
+   - Password: `admin123`
 
-## 🚀 How to Run Locally
+## 📁 Project Structure
 
-### Prerequisites
-
-- Node.js (v18+)
-- Python (v3.9+)
-
-### 1. Backend Setup
-
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-pip install -r requirements.txt
-uvicorn main:app --reload
+```
+ombudsman-portal/
+├── backend/              # FastAPI backend
+│   ├── main.py          # Application entry point
+│   ├── database.py      # Database configuration
+│   ├── models.py        # SQLAlchemy models
+│   ├── schemas.py       # Pydantic schemas
+│   ├── requirements.txt # Python dependencies
+│   ├── runtime.txt      # Python version
+│   └── routers/         # API routes
+│       ├── public.py    # Public endpoints
+│       └── admin.py     # Admin endpoints
+├── frontend/            # React + TypeScript frontend
+│   ├── src/
+│   │   ├── pages/       # Page components
+│   │   └── App.tsx      # Main app component
+│   ├── package.json     # Node dependencies
+│   └── vite.config.ts   # Vite configuration
+└── vercel.json          # Vercel deployment config
 ```
 
-### 2. Frontend Setup
+## 🛠️ Technology Stack
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+### Backend
 
-## 👨‍⚖️ Judges & Reviewers
+- **FastAPI**: Modern Python web framework
+- **SQLAlchemy**: Database ORM
+- **Pydantic**: Data validation
+- **SQLite**: Database (auto-configured for Vercel)
 
-This repository is organized as follows:
+### Frontend
 
-- `/frontend`: The React application source code.
-- `/backend`: The FastAPI server and database models.
-- `vercel.json`: Configuration for Vercel deployment.
+- **React**: UI library
+- **TypeScript**: Type-safe JavaScript
+- **Tailwind CSS**: Utility-first CSS
+- **Vite**: Build tool
+- **React Router**: Client-side routing
+- **Lucide React**: Icon library
 
-**Admin Credentials (Demo):**
+## 🔐 Admin Access
 
-- **Login URL**: `/admin`
-- **Token**: `secret-admin-token`
+- **URL**: `/admin`
+- **Username**: `admin`
+- **Password**: `admin123`
+
+> ⚠️ **Important**: Change these credentials in production by updating `backend/routers/admin.py`
+
+## 📝 License
+
+This project is open source and available for educational and governmental use.
+
+## 🤝 Contributing
+
+This is a hackathon project. Feel free to fork and improve!
 
 ---
 
-_Built with ❤️ for Sierra Leone 🇸🇱_
+**Built for Sierra Leone** 🇸🇱
