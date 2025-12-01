@@ -9,7 +9,7 @@ class AuditLogResponse(BaseModel):
     timestamp: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ComplaintBase(BaseModel):
     ministry: str
@@ -32,7 +32,7 @@ class ComplaintResponse(ComplaintBase):
     audit_logs: List[AuditLogResponse] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ComplaintUpdateStatus(BaseModel):
     status: str

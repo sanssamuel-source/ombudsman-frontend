@@ -278,6 +278,7 @@ npm run build
 2. Import repository in Vercel
 3. Set environment variables:
    - `VITE_BACKEND_URL`: `https://ombudsman-frontend-production-6c5b.up.railway.app/api`
+   - `FRONTEND_URL`: `https://ombudsman-frontend-kappa.vercel.app` (For SMS links)
    - `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_PHONE_NUMBER`
 4. Deploy
 

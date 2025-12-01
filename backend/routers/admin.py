@@ -48,7 +48,7 @@ def update_status(reference_id: str, status_update: schemas.ComplaintUpdateStatu
             if account_sid and auth_token and from_number:
                 client = Client(account_sid, auth_token)
                 message = client.messages.create(
-                    body=f"OmbudsPortal: Your complaint {complaint.reference_id} status is now {complaint.status.replace('_', ' ').upper()}. Track at: https://ombudsman-frontend-theta.vercel.app/track",
+                    body=f"OmbudsPortal: Your complaint {complaint.reference_id} status is now {complaint.status.replace('_', ' ').upper()}. Track at: {os.environ.get('FRONTEND_URL', 'https://ombudsman-frontend-theta.vercel.app')}/track",
                     from_=from_number,
                     to=complaint.phone_number
                 )

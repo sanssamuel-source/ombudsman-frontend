@@ -36,7 +36,7 @@ def submit_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(d
             if account_sid and auth_token and from_number:
                 client = Client(account_sid, auth_token)
                 message = client.messages.create(
-                    body=f"OmbudsPortal: Complaint Received. Ref ID: {db_complaint.reference_id}. Track at: https://ombudsman-frontend-theta.vercel.app/track",
+                    body=f"OmbudsPortal: Complaint Received. Ref ID: {db_complaint.reference_id}. Track at: {os.environ.get('FRONTEND_URL', 'https://ombudsman-frontend-theta.vercel.app')}/track",
                     from_=from_number,
                     to=db_complaint.phone_number
                 )
