@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from .. import models, schemas, database
+import models, schemas, database
 
 router = APIRouter()
 
-from ..services.sms import send_sms
+# from ..services.sms import send_sms
 
 @router.post("/complaint", response_model=schemas.ComplaintResponse)
 def submit_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(database.get_db)):
@@ -13,12 +13,12 @@ def submit_complaint(complaint: schemas.ComplaintCreate, db: Session = Depends(d
     db.commit()
     db.refresh(db_complaint)
     
-    # Send SMS Notification
-    if db_complaint.phone_number:
-        send_sms(
-            db_complaint.phone_number, 
-            f"Ombudsman Portal: Complaint Received. Ref ID: {db_complaint.reference_id}. We will notify you of updates."
-        )
+    # Send SMS Notification (Disabled for Build Stability)
+    # if db_complaint.phone_number:
+    #     send_sms(
+    #         db_complaint.phone_number, 
+    #         f"Ombudsman Portal: Complaint Received. Ref ID: {db_complaint.reference_id}. We will notify you of updates."
+    #     )
         
     return db_complaint
 
