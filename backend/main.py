@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import models, database
-from routers import public, admin, sms
+from routers import public, admin, sms, ussd
 
 # Create tables
 models.Base.metadata.create_all(bind=database.engine)
@@ -20,7 +20,12 @@ app.add_middleware(
 app.include_router(public.router, prefix="/api/public", tags=["Public"])
 app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
 app.include_router(sms.router, tags=["SMS"])
+app.include_router(ussd.router, prefix="/api/ussd", tags=["USSD"])
 
 @app.get("/")
 def read_root():
     return {"message": "Ombudsman Portal API is running"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy", "service": "ombudsman-api", "version": "1.0.0"}
