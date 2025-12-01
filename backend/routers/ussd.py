@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Response
+from fastapi import APIRouter, Request, Response, Depends
 from sqlalchemy.orm import Session
 import models, schemas, database
 
@@ -32,7 +32,7 @@ MINISTRY_MAP = {
 }
 
 @router.post("/ussd/menu")
-async def handle_ussd(request: Request, db: Session = database.get_db):
+async def handle_ussd(request: Request, db: Session = Depends(database.get_db)):
     """
     USSD Menu Handler (AfricasTalking/Twilio compatible)
     
