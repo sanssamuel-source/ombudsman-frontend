@@ -34,6 +34,7 @@ _Public Service Architecture Revamp - Ombudsman Complaint Portal_
 
 ---Key to note https://ombudsman-frontend-kappa.vercel.app/admin
               Password to access it is P@s5w0rd@2026
+https://gamma.app/docs/Ombudsman-Digital-Portal--u0pm3vj08i7x88g
 
 ## 🎯 The Problem
 
@@ -386,5 +387,6 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 _Empowering citizens. Ensuring accountability. Building trust._
 
 </div>
+
 
 
