@@ -298,7 +298,7 @@ See [ROADMAP.md](ROADMAP.md) for detailed future features.
 
 > _Problem statement, solution overview, impact demonstration_
 
-[▶️ Watch Presentation](LINK_TO_PRESENTATION_VIDEO)
+[▶️ Watch Presentation](https://www.loom.com/share/7f587f68f16d4d11a4e12e2efc8a4207)
 
 ### Technical Overview (3 minutes)
 
@@ -371,7 +371,7 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ## 📞 Contact
 
 **Team Lead**: Samuel Williams  
-**Email**: ombudsman@ombudsman.gov.sl  
+**Email**: sansconstruction16@gmail.com  
 **Phone**: +232-79-093505  
 **Location**: Kenema, Sierra Leone
 
@@ -384,3 +384,4 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 _Empowering citizens. Ensuring accountability. Building trust._
 
 </div>
+
