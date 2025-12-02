@@ -6,7 +6,7 @@
 **Team**: Samuel Williams (Lead Developer), Zara (UI/UX), Tonny (Product Manager)  
 **Location**: Kenema, Sierra Leone  
 **Contact**: +232-79-093505  
-**Live Demo**: https://ombudsman-frontend-kappa.vercel.app
+**Live Demo**: https://ombudsman-frontend-kappa.vercel.app Admin login password is P@s5w0rd@2026
 
 ---
 
@@ -246,4 +246,5 @@ This is digital transformation with impact. This is accountability made accessib
 _Big 5 AI & Blockchain Hackathon 2024_
 
 </div>
+
 
