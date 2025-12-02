@@ -438,7 +438,8 @@ _Building trust through transparency, one complaint at a time._
 **Brand Guardian**: Samuel Williams (Lead Developer)  
 **Contact**: +232-79-093505  
 **Location**: Kenema, Sierra Leone  
-**Email**: ombudsman@ombudsman.gov.sl
+**Email**: sansconstruction16@gmail.com
 
 **Last Updated**: December 2, 2024  
 **Version**: 1.0
+
