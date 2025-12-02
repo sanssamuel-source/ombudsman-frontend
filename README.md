@@ -32,7 +32,8 @@ _Public Service Architecture Revamp - Ombudsman Complaint Portal_
 - [Roadmap](#roadmap)
 - [Demo Videos](#demo-videos)
 
----
+---Key to note https://ombudsman-frontend-kappa.vercel.app/admin
+              Password to access it is P@s5w0rd@2026
 
 ## 🎯 The Problem
 
@@ -118,7 +119,8 @@ A **multi-channel digital platform** where any Sierra Leonean can file and track
 - ✅ Multi-ministry and multi-district selection
 
 ### Admin Dashboard
-
+https://ombudsman-frontend-kappa.vercel.app/admin
+Password to access it is P@s5w0rd@2026
 - 📊 **Ministry Hotspots**: Identify which ministries receive most complaints
 - 🗺️ **Geographic Analysis**: District-level complaint patterns
 - 📈 **Status Analytics**: Track resolution rates
@@ -384,4 +386,5 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 _Empowering citizens. Ensuring accountability. Building trust._
 
 </div>
+
 
