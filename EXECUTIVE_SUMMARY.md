@@ -177,7 +177,7 @@ The Big 5 hackathon asked for:
 
 - Full-stack development
 - AI-assisted coding expert
-- GitHub: [Your URL]
+- GitHub: [https://github.com/sanssamuel-source]
 
 **Zara** - UI/UX Designer (Kenema, Sierra Leone)
 
@@ -246,3 +246,4 @@ This is digital transformation with impact. This is accountability made accessib
 _Big 5 AI & Blockchain Hackathon 2024_
 
 </div>
+
