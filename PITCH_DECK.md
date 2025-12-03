@@ -1,17 +1,15 @@
 # 🎤 Ombudsman Portal Pitch Deck
 
-## Gamma AI Presentation Prompts
+## Ombudsman Digital Portal
 
-Copy these prompts into [Gamma.app](https://gamma.app) to generate your pitch deck.
-
+ [Gamma.app](https://gamma.app/docs/Ombudsman-Digital-Portal--u0pm3vj08i7x88g) 
 ---
 
-## 📊 Slide 1: Title Slide
+## 📊 Slide 1: Ombudsman Digital Portal
 
-**Gamma Prompt:**
+
 
 ```
-Create a title slide for a government technology pitch:
 Title: "Ombudsman Digital Portal"
 Subtitle: "Your Voice. Our Accountability."
 Footer: "Big 5 AI & Blockchain Hackathon 2024 | Team: Samuel Williams, Zara, Tonny | Kenema, Sierra Leone"
@@ -23,10 +21,10 @@ Include: Sierra Leone flag emoji 🇸🇱
 
 ## 📊 Slide 2: The Problem
 
-**Gamma Prompt:**
+
 
 ```
-Create a problem statement slide:
+
 Heading: "The Accountability Black Hole"
 
 Pain points (with emojis):
@@ -46,14 +44,13 @@ Style: Problem-focused with red/orange warning colors
 
 ## 📊 Slide 3: Our Solution
 
-**Gamma Prompt:**
 
 ```
-Create a solution overview slide:
+
 Heading: "Multi-Channel Digital Platform"
 
 Three columns with icons:
-1. 🌐 Web Portal - "Full-featured complaint submission & tracking"
+1. 🌐 Web Portal - "Full-featured complaint submission & tracking Whatsapp"
 2. 📱 SMS - "Text complaints without internet"
 3. 📞 USSD (*920#) - "Works on basic feature phones"
 
@@ -67,15 +64,12 @@ Style: Solution-focused with green success colors
 
 ## 📊 Slide 4: How It Works
 
-**Gamma Prompt:**
 
-```
-Create a user journey flow diagram:
 Heading: "Simple 3-Step Process"
 
 Steps in horizontal flow:
 1. FILE → "Submit via web, SMS, or USSD" (icon: 📝)
-2. TRACK → "Get reference ID, receive SMS updates" (icon: 🔍)
+2. TRACK → "Get reference ID, receive SMS/Whatsapp updates" (icon: 🔍)
 3. RESOLVE → "Ombudsman investigates, citizen stays informed" (icon: ✅)
 
 Below: "Average resolution time: 30-45 days (vs. 90+ days paper-based)"
@@ -87,14 +81,14 @@ Style: Process flow with arrows, green progress indicators
 
 ## 📊 Slide 5: Key Features
 
-**Gamma Prompt:**
+
 
 ```
 Create a feature highlights slide:
 Heading: "What Makes Us Different"
 
 Grid of 6 features with icons:
-✅ Multi-Channel Access (Web, SMS, USSD)
+✅ Multi-Channel Access (Web, Whatsapp SMS, USSD)
 ✅ Real-Time Tracking (Reference ID system)
 ✅ NIN Verification (Identity validation)
 ✅ Evidence Upload (Photos/documents)
@@ -110,10 +104,10 @@ Style: Feature grid with green checkmarks, modern tech aesthetic
 
 ## 📊 Slide 6: Who We Serve
 
-**Gamma Prompt:**
+
 
 ```
-Create a user persona slide:
+ user persona slide:
 Heading: "Built for Real Sierra Leoneans"
 
 Three persona cards:
@@ -132,17 +126,14 @@ Three persona cards:
    - Uses: Admin dashboard
    - Pain: "I can't see corruption patterns in paper files"
 
-Style: Persona cards with photos (use diverse African professional headshots)
 ```
 
 ---
 
 ## 📊 Slide 7: Technical Innovation
 
-**Gamma Prompt:**
-
 ```
-Create a technology stack slide:
+ Technology stack slide:
 Heading: "Modern, Scalable Architecture"
 
 Two columns:
@@ -168,10 +159,8 @@ Style: Tech-focused with code snippets background, modern developer aesthetic
 
 ## 📊 Slide 8: Impact & Results
 
-**Gamma Prompt:**
 
 ```
-Create an impact metrics slide:
 Heading: "Early Results & Projections"
 
 Current (Pilot Phase):
@@ -195,10 +184,10 @@ Style: Data-focused with green upward trends
 
 ## 📊 Slide 9: Roadmap
 
-**Gamma Prompt:**
+
 
 ```
-Create a product roadmap timeline:
+Product roadmap timeline:
 Heading: "Future Vision"
 
 Timeline with 4 phases:
@@ -229,8 +218,6 @@ Style: Timeline with icons and vibrant colors for each phase
 
 ## 📊 Slide 10: Competitive Advantage
 
-**Gamma Prompt:**
-
 ```
 Create a comparison table:
 Heading: "Why We Win"
@@ -254,10 +241,10 @@ Style: Comparison table with green checkmarks emphasized
 
 ## 📊 Slide 11: Team
 
-**Gamma Prompt:**
+
 
 ```
-Create a team slide:
+Team slide:
 Heading: "Built in Kenema, Sierra Leone 🇸🇱"
 
 Three team member cards:
@@ -275,19 +262,17 @@ Three team member cards:
 
 Contact: +232-79-093505
 Location: Kenema, Eastern Province
-GitHub: [Your GitHub URL]
+GitHub: [https://github.com/sanssamuel-sourc]
 
-Style: Professional headshot cards with green accent ribbons
+
 ```
 
 ---
 
 ## 📊 Slide 12: Call to Action
 
-**Gamma Prompt:**
-
 ```
-Create a strong closing slide:
+
 Heading: "Ready to Deploy Nationwide"
 
 Two-column layout:
@@ -312,38 +297,9 @@ Style: Call-to-action focused, green button, inspiring tone
 
 ---
 
-## 🎬 Presentation Tips
 
-### For 3-Minute Presentation Video
 
-**Timing Guide:**
-
-- Slides 1-2: Problem (30 seconds)
-- Slides 3-4: Solution (45 seconds)
-- Slides 5-7: Features & Innovation (60 seconds)
-- Slides 8-10: Impact & Advantage (30 seconds)
-- Slides 11-12: Team & CTA (15 seconds)
-
-**Delivery Tips:**
-
-- Speak with passion - you're solving a real problem ✨
-- Use the "farmer in Kenema" story to open
-- Show the live demo (quick screen recording)
-- End with "Dial \*920# for democracy"
-
-### For 3-Minute Technical Overview Video
-
-**Focus On:**
-
-- Architecture diagram (frontend/backend)
-- Live walkthrough of USSD (\*920#)
-- Admin dashboard showing analytics
-- Code snippets (React, FastAPI)
-- Deployment pipeline (GitHub → Vercel/Railway)
-
----
-
-## 📝 Speaker Notes Template
+## 📝 Speaker Notes 
 
 ### Slide 2 (Problem) - Speaker Notes:
 
@@ -372,3 +328,4 @@ _Presentation created for Big 5 AI & Blockchain Hackathon 2024_
 🇸🇱 Proudly Sierra Leonean 🇸🇱
 
 </div>
+
