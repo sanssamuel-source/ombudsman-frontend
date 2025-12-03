@@ -1,6 +1,6 @@
 # 🎤 Ombudsman Portal Pitch Deck
 
-## Ombudsman Digital Portal
+## Ombudsman Digital Portal Click on the Blue Gamma.app link below to take you to the Gamma powerpoint slide.
 
  [Gamma.app](https://gamma.app/docs/Ombudsman-Digital-Portal--u0pm3vj08i7x88g) 
 ---
@@ -328,4 +328,5 @@ _Presentation created for Big 5 AI & Blockchain Hackathon 2024_
 🇸🇱 Proudly Sierra Leonean 🇸🇱
 
 </div>
+
 
