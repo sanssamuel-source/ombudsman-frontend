@@ -242,11 +242,12 @@ This is digital transformation with impact. This is accountability made accessib
 
 **Live Demo**: https://ombudsman-frontend-kappa.vercel.app  
 **GitHub**: [https://github.com/sanssamuel-source]  
-**Contact**: +232-79-093505
+**Contact**: +232-79-093505 sansconstruction16@gmail.com
 
-_Big 5 AI & Blockchain Hackathon 2024_
+_Big 5 AI & Blockchain Hackathon 2025_
 
 </div>
+
 
 
 
